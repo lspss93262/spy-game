@@ -123,9 +123,130 @@ const WORD_SETS = {
       { en: 'Cheesecake', zh: '起司蛋糕', ja: 'チーズケーキ' },
     ],
   ],
+  verb: [
+    [
+      { en: 'Run',       zh: '跑',     ja: '走る' },
+      { en: 'Jump',      zh: '跳',     ja: '跳ぶ' },
+      { en: 'Swim',      zh: '游泳',   ja: '泳ぐ' },
+      { en: 'Fly',       zh: '飛',     ja: '飛ぶ' },
+      { en: 'Climb',     zh: '爬',     ja: '登る' },
+      { en: 'Dance',     zh: '跳舞',   ja: '踊る' },
+      { en: 'Sing',      zh: '唱歌',   ja: '歌う' },
+      { en: 'Crawl',     zh: '爬行',   ja: '這う' },
+      { en: 'Spin',      zh: '旋轉',   ja: '回る' },
+      { en: 'Roll',      zh: '滾動',   ja: '転がる' },
+    ],
+    [
+      { en: 'Laugh',     zh: '笑',     ja: '笑う' },
+      { en: 'Cry',       zh: '哭',     ja: '泣く' },
+      { en: 'Scream',    zh: '尖叫',   ja: '叫ぶ' },
+      { en: 'Whisper',   zh: '耳語',   ja: 'ささやく' },
+      { en: 'Argue',     zh: '爭吵',   ja: '言い争う' },
+      { en: 'Hug',       zh: '擁抱',   ja: '抱きしめる' },
+      { en: 'Kiss',      zh: '親吻',   ja: 'キスする' },
+      { en: 'Stare',     zh: '凝視',   ja: '見つめる' },
+      { en: 'Blink',     zh: '眨眼',   ja: 'まばたく' },
+      { en: 'Smile',     zh: '微笑',   ja: '微笑む' },
+    ],
+    [
+      { en: 'Cook',      zh: '烹飪',   ja: '料理する' },
+      { en: 'Build',     zh: '建造',   ja: '建てる' },
+      { en: 'Draw',      zh: '畫畫',   ja: '描く' },
+      { en: 'Write',     zh: '寫作',   ja: '書く' },
+      { en: 'Read',      zh: '閱讀',   ja: '読む' },
+      { en: 'Teach',     zh: '教導',   ja: '教える' },
+      { en: 'Steal',     zh: '偷竊',   ja: '盗む' },
+      { en: 'Fix',       zh: '修理',   ja: '直す' },
+      { en: 'Hunt',      zh: '狩獵',   ja: '狩る' },
+      { en: 'Plant',     zh: '種植',   ja: '植える' },
+    ],
+  ],
+  adjective: [
+    [
+      { en: 'Happy',     zh: '快樂的',   ja: '嬉しい' },
+      { en: 'Sad',       zh: '悲傷的',   ja: '悲しい' },
+      { en: 'Angry',     zh: '憤怒的',   ja: '怒った' },
+      { en: 'Scared',    zh: '害怕的',   ja: '怖い' },
+      { en: 'Bored',     zh: '無聊的',   ja: '退屈な' },
+      { en: 'Excited',   zh: '興奮的',   ja: 'わくわくした' },
+      { en: 'Tired',     zh: '疲倦的',   ja: '疲れた' },
+      { en: 'Nervous',   zh: '緊張的',   ja: '緊張した' },
+      { en: 'Jealous',   zh: '嫉妒的',   ja: '嫉妬深い' },
+      { en: 'Proud',     zh: '驕傲的',   ja: '誇りに思う' },
+    ],
+    [
+      { en: 'Tiny',      zh: '微小的',   ja: '小さな' },
+      { en: 'Huge',      zh: '巨大的',   ja: '巨大な' },
+      { en: 'Heavy',     zh: '沉重的',   ja: '重い' },
+      { en: 'Light',     zh: '輕盈的',   ja: '軽い' },
+      { en: 'Rough',     zh: '粗糙的',   ja: 'ざらざらした' },
+      { en: 'Smooth',    zh: '光滑的',   ja: 'なめらかな' },
+      { en: 'Sharp',     zh: '鋒利的',   ja: '鋭い' },
+      { en: 'Soft',      zh: '柔軟的',   ja: '柔らかい' },
+      { en: 'Cold',      zh: '寒冷的',   ja: '冷たい' },
+      { en: 'Burning',   zh: '燃燒的',   ja: '燃える' },
+    ],
+    [
+      { en: 'Brave',     zh: '勇敢的',   ja: '勇敢な' },
+      { en: 'Clever',    zh: '聰明的',   ja: '賢い' },
+      { en: 'Lazy',      zh: '懶惰的',   ja: '怠惰な' },
+      { en: 'Cruel',     zh: '殘忍的',   ja: '残酷な' },
+      { en: 'Gentle',    zh: '溫柔的',   ja: '優しい' },
+      { en: 'Greedy',    zh: '貪婪的',   ja: '欲張りな' },
+      { en: 'Honest',    zh: '誠實的',   ja: '正直な' },
+      { en: 'Reckless',  zh: '魯莽的',   ja: '無謀な' },
+      { en: 'Stubborn',  zh: '頑固的',   ja: '頑固な' },
+      { en: 'Sneaky',    zh: '狡猾的',   ja: 'ずるい' },
+    ],
+  ],
+  adverb: [
+    [
+      { en: 'Quickly',   zh: '迅速地',   ja: '素早く' },
+      { en: 'Slowly',    zh: '緩慢地',   ja: 'ゆっくりと' },
+      { en: 'Quietly',   zh: '安靜地',   ja: '静かに' },
+      { en: 'Loudly',    zh: '大聲地',   ja: '大きな声で' },
+      { en: 'Carefully', zh: '小心地',   ja: '注意深く' },
+      { en: 'Wildly',    zh: '瘋狂地',   ja: '激しく' },
+      { en: 'Gently',    zh: '輕柔地',   ja: '優しく' },
+      { en: 'Roughly',   zh: '粗暴地',   ja: '乱暴に' },
+      { en: 'Suddenly',  zh: '突然地',   ja: '突然' },
+      { en: 'Lazily',    zh: '懶洋洋地', ja: 'だらだらと' },
+    ],
+    [
+      { en: 'Always',    zh: '總是',     ja: 'いつも' },
+      { en: 'Never',     zh: '從不',     ja: '決して〜ない' },
+      { en: 'Sometimes', zh: '有時',     ja: '時々' },
+      { en: 'Often',     zh: '經常',     ja: 'よく' },
+      { en: 'Rarely',    zh: '很少',     ja: 'めったに〜ない' },
+      { en: 'Already',   zh: '已經',     ja: 'すでに' },
+      { en: 'Soon',      zh: '很快',     ja: 'もうすぐ' },
+      { en: 'Still',     zh: '仍然',     ja: 'まだ' },
+      { en: 'Forever',   zh: '永遠',     ja: '永遠に' },
+      { en: 'Lately',    zh: '最近',     ja: '最近' },
+    ],
+    [
+      { en: 'Everywhere', zh: '到處',    ja: 'どこでも' },
+      { en: 'Nowhere',   zh: '無處',     ja: 'どこにもない' },
+      { en: 'Nearby',    zh: '附近',     ja: '近くに' },
+      { en: 'Far Away',  zh: '遠處',     ja: '遠くに' },
+      { en: 'Upstairs',  zh: '樓上',     ja: '上の階に' },
+      { en: 'Outside',   zh: '外面',     ja: '外に' },
+      { en: 'Inside',    zh: '裡面',     ja: '中に' },
+      { en: 'Apart',     zh: '分開地',   ja: '離れて' },
+      { en: 'Together',  zh: '一起',     ja: '一緒に' },
+      { en: 'Alone',     zh: '獨自地',   ja: '一人で' },
+    ],
+  ],
 };
 
-const ALL_SETS = [...WORD_SETS.location, ...WORD_SETS.animal, ...WORD_SETS.food];
+const ALL_SETS = [
+  ...WORD_SETS.location,
+  ...WORD_SETS.animal,
+  ...WORD_SETS.food,
+  ...WORD_SETS.verb,
+  ...WORD_SETS.adjective,
+  ...WORD_SETS.adverb,
+];
 const rooms = {};
 
 function generateCode() {
@@ -225,7 +346,7 @@ io.on('connection', (socket) => {
   socket.on('set-genre', ({ genre }) => {
     const room = rooms[socket.roomCode];
     if (!room || room.hostId !== socket.id) return;
-    if (!['location', 'animal', 'food', 'random'].includes(genre)) return;
+    if (!['location', 'animal', 'food', 'verb', 'adjective', 'adverb', 'random'].includes(genre)) return;
     room.genre = genre;
     io.to(socket.roomCode).emit('room-update', getRoomState(room));
   });
@@ -236,8 +357,8 @@ io.on('connection', (socket) => {
     if (room.players.length < 3) return socket.emit('error', 'Need at least 3 players');
 
     const wordSet = pickWordSet(room.genre);
+    const correctWord = wordSet[Math.floor(Math.random() * wordSet.length)];
     const shuffledWords = shuffle(wordSet);
-    const correctWord = wordSet[0];
     const spyIndex = Math.floor(Math.random() * room.players.length);
     const spyId = room.players[spyIndex].id;
 

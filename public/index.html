@@ -199,6 +199,138 @@
     .error-msg { color: var(--accent2); font-size: 12px; letter-spacing: 1px; text-align: center; margin-top: 6px; min-height: 16px; }
     .mt8 { margin-top: 8px; }
     .mt12 { margin-top: 12px; }
+
+    /* Rules button */
+    .rules-btn {
+      margin-top: 10px;
+      padding: 7px 18px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .rules-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Rules overlay */
+    #rules-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+    #rules-overlay.open { display: flex; }
+
+    .rules-modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 22px;
+      width: 100%;
+      max-width: 440px;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .rules-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 30px; height: 30px;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .rules-close:hover { color: var(--text); border-color: var(--accent); }
+
+    /* Language tabs */
+    .rules-lang-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .rules-tab {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .rules-tab.active { border-color: var(--accent); color: var(--accent); background: rgba(232,255,71,0.08); }
+    .rules-tab:hover { border-color: var(--accent); color: var(--text); }
+
+    /* Rules content */
+    .rules-content { display: none; }
+    .rules-content.active { display: block; }
+
+    .rules-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .rules-section { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+
+    .rules-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #c0c0d8;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(232,255,71,0.12);
+      border: 1px solid rgba(232,255,71,0.3);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: bold;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+
+    .role-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin: 2px 0;
+    }
+    .spy-tag { background: rgba(255,71,87,0.15); border: 1px solid rgba(255,71,87,0.4); color: var(--accent2); }
+    .civil-tag { background: rgba(64,224,160,0.1); border: 1px solid rgba(64,224,160,0.3); color: var(--green); }
+
+    .rules-win { display: flex; flex-direction: column; gap: 8px; }
+    .rules-win-item {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .rules-win-item.win { background: rgba(64,224,160,0.08); border: 1px solid rgba(64,224,160,0.25); color: #90d0b0; }
+    .rules-win-item.lose { background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.25); color: #d09090; }
   </style>
 </head>
 <body>
@@ -206,7 +338,76 @@
 <header>
   <h1>SPY WORD</h1>
   <p>Find the spy among you</p>
+  <button class="rules-btn" onclick="toggleRules()">📖 RULES</button>
 </header>
+
+<!-- ── RULES MODAL ─────────────────────────── -->
+<div id="rules-overlay" onclick="toggleRules()">
+  <div class="rules-modal" onclick="event.stopPropagation()">
+    <button class="rules-close" onclick="toggleRules()">✕</button>
+
+    <div class="rules-lang-tabs">
+      <button class="rules-tab active" onclick="switchLang('en')">EN</button>
+      <button class="rules-tab" onclick="switchLang('zh')">中文</button>
+      <button class="rules-tab" onclick="switchLang('ja')">日本語</button>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="rules-content active" id="rules-en">
+      <div class="rules-title">📖 HOW TO PLAY</div>
+      <div class="rules-section">
+        <div class="rules-step"><span class="step-num">1</span><span>One player creates a room and shares the 4-letter code with everyone.</span></div>
+        <div class="rules-step"><span class="step-num">2</span><span>The host picks a <b>genre</b> and sets the <b>discussion timer</b>, then starts the game.</span></div>
+        <div class="rules-step"><span class="step-num">3</span><span>Everyone secretly receives their role:<br><span class="role-tag spy-tag">🕵️ SPY</span> — You don't know the word. Blend in!<br><span class="role-tag civil-tag">👤 CIVILIAN</span> — You know the secret word. Don't say it directly!</span></div>
+        <div class="rules-step"><span class="step-num">4</span><span>All players see a list of <b>10 words</b>. One of them is the correct secret word — but the spy doesn't know which one.</span></div>
+        <div class="rules-step"><span class="step-num">5</span><span>Players take turns giving <b>one clue</b> that relates to the secret word without saying it outright.</span></div>
+        <div class="rules-step"><span class="step-num">6</span><span>After discussion, the host <b>votes out</b> whoever they think is the spy.</span></div>
+        <div class="rules-step"><span class="step-num">7</span><span>After the vote, everything is revealed!</span></div>
+      </div>
+      <div class="rules-win">
+        <div class="rules-win-item win">🎉 <b>Civilians win</b> if the voted-out player is the spy.</div>
+        <div class="rules-win-item lose">😈 <b>Spy wins</b> if someone else gets voted out — or time runs out!</div>
+      </div>
+    </div>
+
+    <!-- TRADITIONAL CHINESE -->
+    <div class="rules-content" id="rules-zh">
+      <div class="rules-title">📖 遊戲規則</div>
+      <div class="rules-section">
+        <div class="rules-step"><span class="step-num">1</span><span>一位玩家建立房間，並將4位字母代碼分享給所有人。</span></div>
+        <div class="rules-step"><span class="step-num">2</span><span>房主選擇<b>類別</b>並設定<b>討論計時器</b>，然後開始遊戲。</span></div>
+        <div class="rules-step"><span class="step-num">3</span><span>所有人秘密收到自己的角色：<br><span class="role-tag spy-tag">🕵️ 臥底</span> — 你不知道答案，設法混入！<br><span class="role-tag civil-tag">👤 平民</span> — 你知道答案，但不能直接說出來！</span></div>
+        <div class="rules-step"><span class="step-num">4</span><span>所有玩家看到一張有 <b>10個詞語</b> 的列表。其中一個是正確答案，但臥底不知道是哪個。</span></div>
+        <div class="rules-step"><span class="step-num">5</span><span>玩家輪流給出一個與答案相關的<b>線索</b>，但不能直接說出答案。</span></div>
+        <div class="rules-step"><span class="step-num">6</span><span>討論結束後，房主<b>投票</b>驅逐他們認為是臥底的玩家。</span></div>
+        <div class="rules-step"><span class="step-num">7</span><span>投票結束後，揭曉所有真相！</span></div>
+      </div>
+      <div class="rules-win">
+        <div class="rules-win-item win">🎉 <b>平民勝利</b>：被驅逐的玩家正好是臥底。</div>
+        <div class="rules-win-item lose">😈 <b>臥底勝利</b>：其他人被驅逐，或時間耗盡！</div>
+      </div>
+    </div>
+
+    <!-- JAPANESE -->
+    <div class="rules-content" id="rules-ja">
+      <div class="rules-title">📖 ゲームルール</div>
+      <div class="rules-section">
+        <div class="rules-step"><span class="step-num">1</span><span>1人がルームを作成し、4文字のコードを全員に共有します。</span></div>
+        <div class="rules-step"><span class="step-num">2</span><span>ホストが<b>カテゴリ</b>を選び、<b>ディスカッションタイマー</b>を設定してゲームを開始します。</span></div>
+        <div class="rules-step"><span class="step-num">3</span><span>全員が秘密で役割を受け取ります：<br><span class="role-tag spy-tag">🕵️ スパイ</span> — 答えを知らない。うまく溶け込め！<br><span class="role-tag civil-tag">👤 シビリアン</span> — 秘密のワードを知っている。直接言わないで！</span></div>
+        <div class="rules-step"><span class="step-num">4</span><span>全員が <b>10個の単語</b> のリストを見ます。その中の1つが正解ですが、スパイはどれかわかりません。</span></div>
+        <div class="rules-step"><span class="step-num">5</span><span>プレイヤーは順番に、秘密のワードに関連する<b>ヒント</b>を1つ出します（直接言うのはNG）。</span></div>
+        <div class="rules-step"><span class="step-num">6</span><span>話し合いの後、ホストがスパイだと思う人を<b>投票で追放</b>します。</span></div>
+        <div class="rules-step"><span class="step-num">7</span><span>投票後、すべてが明かされます！</span></div>
+      </div>
+      <div class="rules-win">
+        <div class="rules-win-item win">🎉 <b>シビリアンの勝利</b>：追放された人がスパイだった場合。</div>
+        <div class="rules-win-item lose">😈 <b>スパイの勝利</b>：別の人が追放されるか、時間切れになった場合！</div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- ── JOIN ─────────────────────────── -->
 <div class="screen active" id="screen-join">
@@ -236,6 +437,9 @@
         <button class="genre-btn" data-genre="location" onclick="setGenre('location')"><span class="genre-icon">🗺️</span>Location</button>
         <button class="genre-btn" data-genre="animal" onclick="setGenre('animal')"><span class="genre-icon">🐾</span>Animal</button>
         <button class="genre-btn" data-genre="food" onclick="setGenre('food')"><span class="genre-icon">🍜</span>Food</button>
+        <button class="genre-btn" data-genre="verb" onclick="setGenre('verb')"><span class="genre-icon">🏃</span>Verb</button>
+        <button class="genre-btn" data-genre="adjective" onclick="setGenre('adjective')"><span class="genre-icon">✨</span>Adjective</button>
+        <button class="genre-btn" data-genre="adverb" onclick="setGenre('adverb')"><span class="genre-icon">⚡</span>Adverb</button>
         <button class="genre-btn active" data-genre="random" onclick="setGenre('random')"><span class="genre-icon">🎲</span>Random</button>
       </div>
       <div class="section-label">DISCUSSION TIMER</div>
@@ -339,7 +543,18 @@
   let timerSeconds = 60;
   let currentPlayers = [];
 
-  const GENRE_LABELS = { location:'🗺️ Location', animal:'🐾 Animal', food:'🍜 Food', random:'🎲 Random' };
+  const GENRE_LABELS = { location:'🗺️ Location', animal:'🐾 Animal', food:'🍜 Food', verb:'🏃 Verb', adjective:'✨ Adjective', adverb:'⚡ Adverb', random:'🎲 Random' };
+
+  function toggleRules() {
+    document.getElementById('rules-overlay').classList.toggle('open');
+  }
+
+  function switchLang(lang) {
+    document.querySelectorAll('.rules-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.rules-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('rules-' + lang).classList.add('active');
+    event.target.classList.add('active');
+  }
 
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
