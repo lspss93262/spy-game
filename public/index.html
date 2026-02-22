@@ -13,12 +13,11 @@
       --border: #2a2a40;
       --accent: #e8ff47;
       --accent2: #ff4757;
+      --green: #40e0a0;
       --text: #e8e8f0;
       --muted: #505070;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -27,288 +26,179 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px 16px 40px;
-      background-image: radial-gradient(ellipse at 20% 50%, #1a1a2e 0%, transparent 60%),
-                        radial-gradient(ellipse at 80% 20%, #0d1117 0%, transparent 50%);
+      padding: 20px 16px 50px;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, #1a1a2e 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, #0d1117 0%, transparent 50%);
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 32px;
-      padding-top: 16px;
-    }
-
+    header { text-align: center; margin-bottom: 28px; padding-top: 14px; }
     header h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 10vw, 86px);
+      font-size: clamp(48px, 9vw, 82px);
       letter-spacing: 8px;
       color: var(--accent);
       text-shadow: 0 0 40px rgba(232,255,71,0.3);
       line-height: 1;
     }
-
-    header p {
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
+    header p { font-size: 11px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
 
     .screen { width: 100%; max-width: 460px; display: none; animation: fadeIn 0.3s ease; }
     .screen.active { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 14px;
-    }
-
-    .card-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
-      letter-spacing: 3px;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 12px; }
+    .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; color: var(--accent); margin-bottom: 14px; }
 
     input[type="text"] {
-      width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 13px 16px;
-      color: var(--text);
-      font-family: 'DM Mono', monospace;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s;
-      margin-bottom: 10px;
+      width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 13px 15px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 15px;
+      outline: none; transition: border-color 0.2s; margin-bottom: 10px;
     }
     input:focus { border-color: var(--accent); }
     input::placeholder { color: #404060; }
 
     .btn {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 8px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 19px;
-      letter-spacing: 3px;
-      cursor: pointer;
-      transition: all 0.15s;
+      width: 100%; padding: 13px; border: none; border-radius: 8px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px;
+      cursor: pointer; transition: all 0.15s;
     }
     .btn-primary { background: var(--accent); color: #0a0a0f; }
     .btn-primary:hover { background: #d4eb2a; transform: translateY(-1px); }
     .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); margin-top: 8px; }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-    .btn-danger { background: var(--accent2); color: white; margin-top: 10px; }
+    .btn-danger { background: var(--accent2); color: white; }
     .btn-danger:hover { background: #e03040; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); margin-top: 8px; }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
     .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
-    .divider { text-align: center; color: #404060; font-size: 11px; letter-spacing: 3px; margin: 14px 0; }
+    .divider { text-align: center; color: #404060; font-size: 11px; letter-spacing: 3px; margin: 12px 0; }
+    .section-label { font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
 
     /* Room code */
     .room-code {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      letter-spacing: 12px;
-      color: var(--accent);
-      text-align: center;
-      padding: 18px;
-      background: var(--surface2);
-      border-radius: 10px;
-      margin-bottom: 6px;
-      text-shadow: 0 0 30px rgba(232,255,71,0.35);
+      font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 12px; color: var(--accent);
+      text-align: center; padding: 16px; background: var(--surface2); border-radius: 10px;
+      margin-bottom: 6px; text-shadow: 0 0 30px rgba(232,255,71,0.35);
     }
-    .room-code-label {
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
+    .room-code-label { text-align: center; font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 18px; }
 
     /* Player list */
-    .player-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
+    .player-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .player-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 13px;
-      background: var(--surface2);
-      border-radius: 8px;
-      font-size: 13px;
-      border: 1px solid transparent;
+      display: flex; align-items: center; gap: 10px; padding: 9px 13px;
+      background: var(--surface2); border-radius: 8px; font-size: 13px; border: 1px solid transparent;
     }
     .player-item.host { border-color: rgba(232,255,71,0.25); }
-    .player-dot { width: 7px; height: 7px; border-radius: 50%; background: #40e0a0; flex-shrink: 0; }
+    .player-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
     .player-name { flex: 1; }
     .player-badge { font-size: 10px; letter-spacing: 2px; color: var(--accent); }
 
-    /* Section label */
-    .section-label { font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-
-    /* Timer control */
-    .timer-row {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--surface2);
-      border-radius: 8px;
-      padding: 11px 14px;
-      margin-bottom: 14px;
-    }
+    /* Timer */
+    .timer-row { display: flex; align-items: center; gap: 10px; background: var(--surface2); border-radius: 8px; padding: 11px 14px; margin-bottom: 12px; }
     .timer-label { font-size: 11px; letter-spacing: 2px; color: var(--muted); flex: 1; }
     .timer-value { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--accent); min-width: 70px; text-align: center; }
-    .timer-btn {
-      width: 34px; height: 34px; border-radius: 6px;
-      border: 1px solid var(--border); background: var(--surface);
-      color: var(--text); font-size: 18px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s;
-    }
+    .timer-btn { width: 34px; height: 34px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
     .timer-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Genre picker */
-    .genre-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .genre-btn {
-      padding: 10px 6px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s;
-    }
-    .genre-btn .genre-icon { display: block; font-size: 22px; margin-bottom: 4px; }
+    /* Genre */
+    .genre-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 12px; }
+    .genre-btn { padding: 10px 5px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; cursor: pointer; text-align: center; transition: all 0.15s; }
+    .genre-btn .genre-icon { display: block; font-size: 20px; margin-bottom: 3px; }
     .genre-btn:hover { border-color: var(--accent); color: var(--text); }
     .genre-btn.active { border-color: var(--accent); background: rgba(232,255,71,0.1); color: var(--accent); }
 
-    /* Waiting */
-    .waiting-msg { text-align: center; color: var(--muted); font-size: 12px; letter-spacing: 2px; padding: 18px; }
+    .waiting-msg { text-align: center; color: var(--muted); font-size: 12px; letter-spacing: 2px; padding: 16px; }
+    .genre-badge { display: inline-block; padding: 5px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; letter-spacing: 2px; color: var(--accent); background: rgba(232,255,71,0.07); margin-bottom: 12px; }
 
     /* Role banner */
-    .role-banner { text-align: center; padding: 26px 18px; border-radius: 12px; margin-bottom: 14px; }
-    .role-banner.spy {
-      background: linear-gradient(135deg, #1a0810, #2a0f1a);
-      border: 1px solid rgba(255,71,87,0.4);
-    }
-    .role-banner.civilian {
-      background: linear-gradient(135deg, #0f1a0a, #1a2a10);
-      border: 1px solid rgba(232,255,71,0.3);
-    }
-    .role-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; margin-bottom: 6px; }
+    .role-banner { text-align: center; padding: 22px 16px; border-radius: 12px; margin-bottom: 12px; }
+    .role-banner.spy { background: linear-gradient(135deg,#1a0810,#2a0f1a); border: 1px solid rgba(255,71,87,0.4); }
+    .role-banner.civilian { background: linear-gradient(135deg,#0f1a0a,#1a2a10); border: 1px solid rgba(232,255,71,0.3); }
+    .role-label { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 4px; margin-bottom: 6px; }
     .role-banner.spy .role-label { color: var(--accent2); }
     .role-banner.civilian .role-label { color: #60c070; }
-
-    /* Trilingual word display */
-    .tri-word {
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-    }
-    .tri-word .w-en {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(36px, 7vw, 56px);
-      letter-spacing: 3px;
-      line-height: 1;
-    }
-    .tri-word .w-zh {
-      font-size: clamp(22px, 4vw, 32px);
-      letter-spacing: 4px;
-      line-height: 1.2;
-    }
-    .tri-word .w-ja {
-      font-size: clamp(14px, 2.5vw, 20px);
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.4;
-    }
-    .role-banner.spy .w-en,
-    .role-banner.spy .w-zh { color: var(--accent2); text-shadow: 0 0 20px rgba(255,71,87,0.5); }
-    .role-banner.civilian .w-en,
-    .role-banner.civilian .w-zh { color: var(--accent); text-shadow: 0 0 20px rgba(232,255,71,0.4); }
-    .role-hint { font-size: 11px; letter-spacing: 2px; color: #506050; margin-top: 10px; }
+    .tri-word { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+    .tri-word .w-zh { font-size: clamp(22px,4vw,30px); letter-spacing: 4px; line-height:1.2; }
+    .tri-word .w-en { font-family: 'Bebas Neue',sans-serif; font-size: clamp(32px,6vw,50px); letter-spacing: 3px; line-height:1; }
+    .tri-word .w-ja { font-size: clamp(13px,2.5vw,18px); letter-spacing: 2px; color: rgba(255,255,255,0.45); line-height:1.4; }
+    .role-banner.spy .w-en, .role-banner.spy .w-zh { color: var(--accent2); text-shadow: 0 0 20px rgba(255,71,87,0.5); }
+    .role-banner.civilian .w-en, .role-banner.civilian .w-zh { color: var(--accent); text-shadow: 0 0 20px rgba(232,255,71,0.4); }
+    .role-hint { font-size: 11px; letter-spacing: 2px; color: #506050; margin-top: 8px; }
 
     /* Big timer */
-    .big-timer {
-      text-align: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 76px;
-      letter-spacing: 4px;
-      color: var(--accent);
-      line-height: 1;
-      transition: color 0.3s;
-    }
+    .big-timer { text-align: center; font-family: 'Bebas Neue',sans-serif; font-size: 72px; letter-spacing: 4px; color: var(--accent); line-height:1; transition: color 0.3s; }
     .big-timer.urgent { color: var(--accent2); animation: pulse 0.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* Word grid */
-    .word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 14px; }
-    .word-cell {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 8px;
-      text-align: center;
-      transition: all 0.2s;
-    }
-    .word-cell .wc-en { font-size: 13px; font-weight: 500; letter-spacing: 1px; }
-    .word-cell .wc-zh { font-size: 15px; letter-spacing: 2px; margin: 2px 0; }
+    .word-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 7px; margin-bottom: 12px; }
+    .word-cell { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 9px 7px; text-align: center; transition: all 0.2s; }
+    .word-cell .wc-zh { font-size: 15px; letter-spacing: 2px; }
+    .word-cell .wc-en { font-size: 12px; letter-spacing: 1px; margin: 2px 0; }
     .word-cell .wc-ja { font-size: 11px; color: var(--muted); }
+    .word-cell.correct { background: rgba(232,255,71,0.12); border-color: var(--accent); }
+    .word-cell.correct .wc-en, .word-cell.correct .wc-zh { color: var(--accent); }
+    .word-cell.wrong { opacity: 0.28; }
 
-    .word-cell.correct {
-      background: rgba(232,255,71,0.12);
-      border-color: var(--accent);
-    }
-    .word-cell.correct .wc-en,
-    .word-cell.correct .wc-zh { color: var(--accent); }
-    .word-cell.wrong { opacity: 0.3; }
-
-    /* Players in game */
-    .players-in-game { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+    /* Players chips */
+    .players-in-game { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
     .player-chip { padding: 5px 11px; background: var(--surface2); border-radius: 20px; font-size: 12px; border: 1px solid var(--border); }
 
-    /* Reveal */
-    .reveal-spy {
-      text-align: center; padding: 28px;
-      background: linear-gradient(135deg, #1a0810, #2a0f1a);
-      border: 1px solid rgba(255,71,87,0.5);
-      border-radius: 12px; margin-bottom: 14px;
+    /* Vote buttons list */
+    .vote-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .vote-player-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; cursor: pointer; transition: all 0.15s; font-family: 'DM Mono', monospace;
+      color: var(--text); font-size: 14px;
     }
-    .reveal-spy-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 5px; color: var(--accent2); margin-bottom: 6px; }
-    .reveal-spy-name { font-family: 'Bebas Neue', sans-serif; font-size: 50px; letter-spacing: 4px; color: white; }
+    .vote-player-btn:hover { border-color: var(--accent2); background: rgba(255,71,87,0.08); }
+    .vote-player-btn .vp-name { font-weight: 500; }
+    .vote-player-btn .vp-action { font-size: 11px; letter-spacing: 2px; color: var(--accent2); }
 
-    .reveal-word { text-align: center; padding: 18px; background: var(--surface2); border-radius: 10px; margin-bottom: 14px; }
-    .reveal-word-label { font-size: 11px; letter-spacing: 3px; color: var(--muted); margin-bottom: 8px; }
-
-    /* Readonly genre badge for guests */
-    .genre-badge {
-      display: inline-block;
-      padding: 6px 14px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 12px;
-      letter-spacing: 2px;
-      color: var(--accent);
-      background: rgba(232,255,71,0.07);
-      margin-bottom: 14px;
+    /* Voting result screen */
+    .voted-out-banner {
+      text-align: center; padding: 28px 18px;
+      background: linear-gradient(135deg,#1a0810,#2a0f1a);
+      border: 1px solid rgba(255,71,87,0.5); border-radius: 12px; margin-bottom: 12px;
     }
+    .voted-out-label { font-family: 'Bebas Neue',sans-serif; font-size: 13px; letter-spacing: 5px; color: var(--accent2); margin-bottom: 4px; }
+    .voted-out-name { font-family: 'Bebas Neue',sans-serif; font-size: 50px; letter-spacing: 3px; color: white; line-height:1.1; }
+    .voted-out-sub { font-size: 11px; letter-spacing: 2px; color: #705060; margin-top: 6px; }
 
-    .error-msg { color: var(--accent2); font-size: 12px; letter-spacing: 1px; text-align: center; margin-top: 6px; min-height: 18px; }
+    /* Full reveal — player cards */
+    .reveal-players-grid { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .reveal-player-card {
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+      border-radius: 10px; border: 1px solid var(--border); background: var(--surface2);
+    }
+    .reveal-player-card.is-spy { border-color: rgba(255,71,87,0.5); background: rgba(255,71,87,0.07); }
+    .reveal-player-card.voted-out-card { border-color: rgba(255,140,0,0.5); background: rgba(255,140,0,0.06); }
+    .rpc-icon { font-size: 22px; flex-shrink: 0; }
+    .rpc-name { flex: 1; font-size: 14px; font-weight: 500; }
+    .rpc-role { font-size: 10px; letter-spacing: 2px; }
+    .rpc-word { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .is-spy .rpc-role { color: var(--accent2); }
+    .voted-out-card .rpc-role { color: orange; }
+    .civilian-card .rpc-role { color: var(--green); }
+
+    /* Result banner */
+    .result-banner {
+      text-align: center; padding: 20px; border-radius: 12px; margin-bottom: 12px;
+    }
+    .result-banner.win { background: linear-gradient(135deg,#0f1a0a,#1a2a10); border: 1px solid rgba(64,224,160,0.4); }
+    .result-banner.lose { background: linear-gradient(135deg,#1a0810,#2a0f1a); border: 1px solid rgba(255,71,87,0.4); }
+    .result-label { font-family: 'Bebas Neue',sans-serif; font-size: 13px; letter-spacing: 5px; margin-bottom: 4px; }
+    .result-banner.win .result-label { color: var(--green); }
+    .result-banner.lose .result-label { color: var(--accent2); }
+    .result-title { font-family: 'Bebas Neue',sans-serif; font-size: 36px; letter-spacing: 3px; }
+    .result-banner.win .result-title { color: var(--accent); }
+    .result-banner.lose .result-title { color: var(--accent2); }
+
+    .error-msg { color: var(--accent2); font-size: 12px; letter-spacing: 1px; text-align: center; margin-top: 6px; min-height: 16px; }
+    .mt8 { margin-top: 8px; }
+    .mt12 { margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -318,7 +208,7 @@
   <p>Find the spy among you</p>
 </header>
 
-<!-- ── JOIN ─────────────────────────────────────── -->
+<!-- ── JOIN ─────────────────────────── -->
 <div class="screen active" id="screen-join">
   <div class="card">
     <div class="card-title">ENTER YOUR NAME</div>
@@ -331,7 +221,7 @@
   </div>
 </div>
 
-<!-- ── LOBBY ─────────────────────────────────────── -->
+<!-- ── LOBBY ─────────────────────────── -->
 <div class="screen" id="screen-lobby">
   <div class="card">
     <div class="room-code-label">ROOM CODE — SHARE THIS</div>
@@ -340,24 +230,14 @@
     <div class="section-label">PLAYERS (<span id="player-count">0</span>)</div>
     <ul class="player-list" id="player-list"></ul>
 
-    <!-- HOST CONTROLS -->
     <div id="host-controls" style="display:none">
       <div class="section-label">GENRE</div>
       <div class="genre-grid">
-        <button class="genre-btn" data-genre="location" onclick="setGenre('location')">
-          <span class="genre-icon">🗺️</span>Location
-        </button>
-        <button class="genre-btn" data-genre="animal" onclick="setGenre('animal')">
-          <span class="genre-icon">🐾</span>Animal
-        </button>
-        <button class="genre-btn" data-genre="food" onclick="setGenre('food')">
-          <span class="genre-icon">🍜</span>Food
-        </button>
-        <button class="genre-btn active" data-genre="random" onclick="setGenre('random')">
-          <span class="genre-icon">🎲</span>Random
-        </button>
+        <button class="genre-btn" data-genre="location" onclick="setGenre('location')"><span class="genre-icon">🗺️</span>Location</button>
+        <button class="genre-btn" data-genre="animal" onclick="setGenre('animal')"><span class="genre-icon">🐾</span>Animal</button>
+        <button class="genre-btn" data-genre="food" onclick="setGenre('food')"><span class="genre-icon">🍜</span>Food</button>
+        <button class="genre-btn active" data-genre="random" onclick="setGenre('random')"><span class="genre-icon">🎲</span>Random</button>
       </div>
-
       <div class="section-label">DISCUSSION TIMER</div>
       <div class="timer-row">
         <span class="timer-label">DURATION</span>
@@ -365,23 +245,21 @@
         <span class="timer-value" id="timer-display">1:00</span>
         <button class="timer-btn" onclick="adjustTimer(60)">+</button>
       </div>
-
       <button class="btn btn-primary" id="start-btn" onclick="startGame()">START GAME</button>
       <div class="error-msg" id="lobby-error"></div>
     </div>
 
-    <!-- GUEST VIEW -->
     <div id="guest-waiting" style="display:none">
       <div class="section-label">GENRE</div>
       <div id="guest-genre-badge" class="genre-badge">🎲 Random</div>
       <div class="section-label">TIMER</div>
-      <div class="genre-badge" id="guest-timer-badge">1:00</div>
+      <div id="guest-timer-badge" class="genre-badge">1:00</div>
       <div class="waiting-msg">Waiting for host to start...</div>
     </div>
   </div>
 </div>
 
-<!-- ── GAME ─────────────────────────────────────── -->
+<!-- ── GAME ─────────────────────────── -->
 <div class="screen" id="screen-game">
   <div class="card">
     <div id="role-display"></div>
@@ -396,31 +274,60 @@
   <div class="card">
     <div class="section-label">PLAYERS IN ROOM</div>
     <div class="players-in-game" id="game-players"></div>
-    <div id="host-reveal-btn" style="display:none">
-      <button class="btn btn-danger" onclick="revealNow()">REVEAL SPY NOW</button>
+
+    <!-- Host: vote out or reveal -->
+    <div id="host-vote-section" style="display:none">
+      <div class="section-label mt12">VOTE OUT A PLAYER</div>
+      <div class="vote-list" id="vote-list"></div>
+      <button class="btn btn-ghost" onclick="revealNow()">SKIP VOTE — REVEAL NOW</button>
     </div>
   </div>
 </div>
 
-<!-- ── REVEAL ─────────────────────────────────────── -->
+<!-- ── VOTING RESULT ─────────────────────────── -->
+<div class="screen" id="screen-voting">
+  <div class="card">
+    <div class="voted-out-banner">
+      <div class="voted-out-label">⚖️ VOTED OUT</div>
+      <div class="voted-out-name" id="voted-out-name">---</div>
+      <div class="voted-out-sub">Was this the spy?</div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:16px;line-height:1.7;">
+      Discuss the result, then reveal<br>to find out if you were right.
+    </p>
+    <div id="host-confirm-btn" style="display:none">
+      <button class="btn btn-primary" onclick="confirmReveal()">REVEAL EVERYTHING</button>
+    </div>
+    <div id="guest-confirm-wait" style="display:none">
+      <div class="waiting-msg">Waiting for host to reveal...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── REVEAL ─────────────────────────── -->
 <div class="screen" id="screen-reveal">
   <div class="card">
-    <div class="reveal-spy">
-      <div class="reveal-spy-label">🕵️ THE SPY WAS</div>
-      <div class="reveal-spy-name" id="reveal-spy-name">---</div>
-    </div>
+    <div id="result-banner"></div>
 
-    <div class="reveal-word">
-      <div class="reveal-word-label">THE CORRECT WORD WAS</div>
+    <div class="reveal-word" style="text-align:center;padding:16px;background:var(--surface2);border-radius:10px;margin-bottom:12px;">
+      <div class="section-label" style="margin-bottom:8px;">THE CORRECT WORD WAS</div>
       <div id="reveal-correct-word"></div>
     </div>
 
     <div class="section-label">ALL WORDS</div>
     <div class="word-grid" id="reveal-word-grid"></div>
+  </div>
 
-    <div id="host-reset-btn" style="display:none">
-      <button class="btn btn-primary" onclick="resetGame()" style="margin-top:14px">PLAY AGAIN</button>
-    </div>
+  <div class="card">
+    <div class="section-label">EVERYONE'S ROLE</div>
+    <div class="reveal-players-grid" id="reveal-players-grid"></div>
+  </div>
+
+  <div class="card" id="host-reset-card" style="display:none">
+    <button class="btn btn-primary" onclick="resetGame()">↩ BACK TO ROOM</button>
+  </div>
+  <div style="max-width:460px;width:100%;" id="guest-reset-card" style="display:none">
+    <div class="waiting-msg">Waiting for host to start next round...</div>
   </div>
 </div>
 
@@ -429,19 +336,15 @@
   const socket = io();
   let myId = null;
   let isHost = false;
-  let timerSeconds = 60; // local copy for display
+  let timerSeconds = 60;
+  let currentPlayers = [];
 
-  const GENRE_LABELS = {
-    location: '🗺️ Location',
-    animal:   '🐾 Animal',
-    food:     '🍜 Food',
-    random:   '🎲 Random',
-  };
+  const GENRE_LABELS = { location:'🗺️ Location', animal:'🐾 Animal', food:'🍜 Food', random:'🎲 Random' };
 
-  // ── helpers ────────────────────────────────────────
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
   }
 
   function setError(id, msg) {
@@ -452,12 +355,11 @@
   }
 
   function fmtTime(s) {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m}:${String(sec).padStart(2, '0')}`;
+    const m = Math.floor(s / 60), sec = s % 60;
+    return `${m}:${String(sec).padStart(2,'0')}`;
   }
 
-  function renderWordCell(w, extraClass = '') {
+  function renderWordCell(w, extraClass='') {
     return `<div class="word-cell ${extraClass}">
       <div class="wc-zh">${w.zh}</div>
       <div class="wc-en">${w.en}</div>
@@ -465,79 +367,73 @@
     </div>`;
   }
 
-  function renderTriWord(w, cls = '') {
-    return `<div class="tri-word ${cls}">
+  function renderTriWord(w) {
+    return `<div class="tri-word">
       <div class="w-zh">${w.zh}</div>
       <div class="w-en">${w.en}</div>
       <div class="w-ja">${w.ja}</div>
     </div>`;
   }
 
-  // ── join / create ───────────────────────────────────
+  // ── join/create ──
   function getName() {
     const n = document.getElementById('input-name').value.trim();
-    if (!n) { setError('join-error', 'Please enter your name'); return null; }
+    if (!n) { setError('join-error','Please enter your name'); return null; }
     return n;
   }
-
-  function createRoom() {
-    const name = getName(); if (!name) return;
-    socket.emit('create-room', { name });
-  }
-
+  function createRoom() { const name = getName(); if (name) socket.emit('create-room',{name}); }
   function joinRoom() {
     const name = getName(); if (!name) return;
     const code = document.getElementById('input-code').value.trim().toUpperCase();
-    if (!code || code.length !== 4) { setError('join-error', 'Enter a valid 4-letter code'); return; }
-    socket.emit('join-room', { name, code });
+    if (!code || code.length !== 4) { setError('join-error','Enter a valid 4-letter code'); return; }
+    socket.emit('join-room',{name,code});
   }
 
-  // ── lobby controls ──────────────────────────────────
+  // ── lobby ──
   function setGenre(genre) {
-    socket.emit('set-genre', { genre });
-    document.querySelectorAll('.genre-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.genre === genre);
-    });
+    socket.emit('set-genre',{genre});
+    document.querySelectorAll('.genre-btn').forEach(b => b.classList.toggle('active', b.dataset.genre === genre));
   }
-
   function adjustTimer(delta) {
-    // step by 1 min, range 60–600
     timerSeconds = Math.max(60, Math.min(600, timerSeconds + delta));
     document.getElementById('timer-display').textContent = fmtTime(timerSeconds);
-    socket.emit('set-timer', { duration: timerSeconds });
+    socket.emit('set-timer',{duration: timerSeconds});
   }
-
   function startGame() { socket.emit('start-game'); }
+
+  // ── game ──
+  function voteOut(targetId) {
+    if (!isHost) return;
+    if (!confirm('Vote out this player?')) return;
+    socket.emit('vote-out',{targetId});
+  }
   function revealNow() { socket.emit('reveal'); }
+  function confirmReveal() { socket.emit('confirm-reveal'); }
   function resetGame() { socket.emit('reset-game'); }
 
-  // ── socket events ───────────────────────────────────
-  socket.on('room-joined', ({ code, playerId }) => {
+  // ── socket events ──
+  socket.on('room-joined', ({code, playerId}) => {
     myId = playerId;
     document.getElementById('lobby-code').textContent = code;
     showScreen('screen-lobby');
   });
 
-  socket.on('room-update', ({ players, gameState, timerDuration, hostId, genre }) => {
+  socket.on('room-update', ({players, gameState, timerDuration, hostId, genre}) => {
     isHost = hostId === myId;
     timerSeconds = timerDuration;
+    currentPlayers = players;
 
-    // Timer display
-    document.getElementById('timer-display') && (document.getElementById('timer-display').textContent = fmtTime(timerDuration));
-    document.getElementById('guest-timer-badge') && (document.getElementById('guest-timer-badge').textContent = fmtTime(timerDuration));
+    // sync timer label
+    const td = document.getElementById('timer-display');
+    if (td) td.textContent = fmtTime(timerDuration);
+    const gtb = document.getElementById('guest-timer-badge');
+    if (gtb) gtb.textContent = fmtTime(timerDuration);
+    const ggb = document.getElementById('guest-genre-badge');
+    if (ggb) ggb.textContent = GENRE_LABELS[genre] || genre;
 
-    // Genre badge for guests
-    document.getElementById('guest-genre-badge') && (document.getElementById('guest-genre-badge').textContent = GENRE_LABELS[genre] || genre);
+    document.querySelectorAll('.genre-btn').forEach(b => b.classList.toggle('active', b.dataset.genre === genre));
 
-    // Genre buttons (host)
-    document.querySelectorAll('.genre-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.genre === genre);
-    });
-
-    // Player count
     document.getElementById('player-count').textContent = players.length;
-
-    // Player list
     const ul = document.getElementById('player-list');
     ul.innerHTML = '';
     players.forEach(p => {
@@ -547,39 +443,49 @@
       ul.appendChild(li);
     });
 
-    // Game players chips
+    document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
+    document.getElementById('guest-waiting').style.display = isHost ? 'none' : 'block';
+    const sb = document.getElementById('start-btn');
+    if (sb) sb.disabled = players.length < 3;
+
+    // game player chips
     const gp = document.getElementById('game-players');
     if (gp) gp.innerHTML = players.map(p => `<div class="player-chip">${p.name}</div>`).join('');
 
-    // Host/guest view
-    document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
-    document.getElementById('guest-waiting').style.display = isHost ? 'none' : 'block';
+    // vote list (host only, during playing)
+    const hvs = document.getElementById('host-vote-section');
+    if (hvs) hvs.style.display = isHost ? 'block' : 'none';
+    const vl = document.getElementById('vote-list');
+    if (vl) {
+      vl.innerHTML = players.map(p => `
+        <button class="vote-player-btn" onclick="voteOut('${p.id}')">
+          <span class="vp-name">${p.name}${p.id === myId ? ' (you)' : ''}</span>
+          <span class="vp-action">VOTE OUT ☞</span>
+        </button>`).join('');
+    }
 
-    const startBtn = document.getElementById('start-btn');
-    if (startBtn) startBtn.disabled = players.length < 3;
-
-    const hrb = document.getElementById('host-reveal-btn');
-    if (hrb) hrb.style.display = isHost ? 'block' : 'none';
-
-    const hrsb = document.getElementById('host-reset-btn');
-    if (hrsb) hrsb.style.display = isHost ? 'block' : 'none';
+    // host/guest reset card
+    const hrc = document.getElementById('host-reset-card');
+    if (hrc) hrc.style.display = isHost ? 'block' : 'none';
+    const grc = document.getElementById('guest-reset-card');
+    if (grc) grc.style.display = isHost ? 'none' : 'block';
 
     if (gameState === 'lobby') showScreen('screen-lobby');
   });
 
-  socket.on('game-start', ({ isSpy, word, wordList, timeLeft }) => {
-    // Role banner
+  socket.on('game-start', ({isSpy, word, wordList, timeLeft}) => {
+    // Role display
     const roleDiv = document.getElementById('role-display');
     if (isSpy) {
       roleDiv.innerHTML = `
         <div class="role-banner spy">
           <div class="role-label">🕵️ YOUR ROLE</div>
           <div class="tri-word">
-            <div class="w-zh" style="color:var(--accent2);font-size:28px;text-shadow:0 0 20px rgba(255,71,87,0.5)">你是臥底</div>
-            <div class="w-en" style="color:var(--accent2);font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:3px">YOU ARE THE SPY</div>
-            <div class="w-ja" style="color:rgba(255,71,87,0.6);font-size:16px">あなたはスパイです</div>
+            <div class="w-zh" style="color:var(--accent2);font-size:26px;text-shadow:0 0 20px rgba(255,71,87,0.5)">你是臥底</div>
+            <div class="w-en" style="color:var(--accent2);font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px">YOU ARE THE SPY</div>
+            <div class="w-ja" style="color:rgba(255,71,87,0.55);font-size:15px">あなたはスパイです</div>
           </div>
-          <div class="role-hint">Blend in. Guess the word from context!</div>
+          <div class="role-hint">Blend in. Guess the secret word from context!</div>
         </div>`;
     } else {
       roleDiv.innerHTML = `
@@ -591,38 +497,72 @@
     }
 
     // Word grid
-    const grid = document.getElementById('word-grid');
-    grid.innerHTML = wordList.map(w => renderWordCell(w)).join('');
+    document.getElementById('word-grid').innerHTML = wordList.map(w => renderWordCell(w)).join('');
 
     // Timer
-    document.getElementById('game-timer').textContent = fmtTime(timeLeft);
-    document.getElementById('game-timer').className = 'big-timer';
+    const gt = document.getElementById('game-timer');
+    gt.textContent = fmtTime(timeLeft);
+    gt.className = 'big-timer';
 
     showScreen('screen-game');
   });
 
-  socket.on('timer-tick', ({ timeLeft }) => {
+  socket.on('timer-tick', ({timeLeft}) => {
     const el = document.getElementById('game-timer');
     el.textContent = fmtTime(timeLeft);
     el.className = 'big-timer' + (timeLeft <= 10 ? ' urgent' : '');
   });
 
-  socket.on('game-reveal', ({ spyName, correctWord, wordList }) => {
-    document.getElementById('reveal-spy-name').textContent = spyName || '???';
+  socket.on('voting-result', ({votedOutId, votedOutName}) => {
+    document.getElementById('voted-out-name').textContent = votedOutName;
+    document.getElementById('host-confirm-btn').style.display = isHost ? 'block' : 'none';
+    document.getElementById('guest-confirm-wait').style.display = isHost ? 'none' : 'block';
+    showScreen('screen-voting');
+  });
 
+  socket.on('game-reveal', ({spyId, spyName, votedOutId, votedOutName, correctWord, wordList, playerReveal}) => {
+    // Result banner: did civilians win?
+    const civiliansWon = votedOutId === spyId;
+    const noVote = !votedOutId;
+    const rb = document.getElementById('result-banner');
+    if (noVote) {
+      rb.innerHTML = `<div class="result-banner lose"><div class="result-label">TIME'S UP</div><div class="result-title">THE SPY SURVIVED!</div></div>`;
+    } else if (civiliansWon) {
+      rb.innerHTML = `<div class="result-banner win"><div class="result-label">🎉 CIVILIANS WIN!</div><div class="result-title">${votedOutName} WAS THE SPY</div></div>`;
+    } else {
+      rb.innerHTML = `<div class="result-banner lose"><div class="result-label">😈 SPY WINS!</div><div class="result-title">WRONG VOTE — ${spyName} WAS THE SPY</div></div>`;
+    }
+
+    // Correct word
     const rcw = document.getElementById('reveal-correct-word');
-    if (correctWord) {
-      rcw.innerHTML = renderTriWord(correctWord);
-      // style the tri-word in accent
-      rcw.querySelectorAll('.w-en,.w-zh').forEach(el => el.style.color = 'var(--accent)');
-    }
+    rcw.innerHTML = renderTriWord(correctWord);
+    rcw.querySelectorAll('.w-en,.w-zh').forEach(el => el.style.color = 'var(--accent)');
 
-    const grid = document.getElementById('reveal-word-grid');
-    if (wordList && correctWord) {
-      grid.innerHTML = wordList.map(w =>
-        renderWordCell(w, w.en === correctWord.en ? 'correct' : 'wrong')
-      ).join('');
-    }
+    // Word grid
+    document.getElementById('reveal-word-grid').innerHTML = wordList.map(w =>
+      renderWordCell(w, w.en === correctWord.en ? 'correct' : 'wrong')
+    ).join('');
+
+    // Player role cards
+    const pg = document.getElementById('reveal-players-grid');
+    pg.innerHTML = playerReveal.map(p => {
+      const isSpy = p.isSpy;
+      const isVotedOut = p.id === votedOutId;
+      let cardClass = isSpy ? 'is-spy' : 'civilian-card';
+      if (isVotedOut) cardClass += ' voted-out-card';
+      const icon = isSpy ? '🕵️' : '👤';
+      const roleText = isSpy ? 'SPY' : 'CIVILIAN';
+      const wordDisplay = isSpy ? '???' : `${p.word.zh} / ${p.word.en}`;
+      const votedTag = isVotedOut ? ' <span style="font-size:10px;color:orange;">(VOTED OUT)</span>' : '';
+      return `<div class="reveal-player-card ${cardClass}">
+        <div class="rpc-icon">${icon}</div>
+        <div style="flex:1">
+          <div class="rpc-name">${p.name}${votedTag}</div>
+          <div class="rpc-role">${roleText}</div>
+          <div class="rpc-word">${wordDisplay}</div>
+        </div>
+      </div>`;
+    }).join('');
 
     showScreen('screen-reveal');
   });
@@ -638,7 +578,7 @@
     setError('lobby-error', msg);
   });
 
-  // Input helpers
+  // Keyboard
   document.getElementById('input-code').addEventListener('input', e => {
     e.target.value = e.target.value.toUpperCase();
   });

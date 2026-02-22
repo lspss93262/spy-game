@@ -8,8 +8,6 @@ const io = new Server(server);
 
 app.use(express.static('public'));
 
-// Each word: { en, zh, ja }
-// First item in each array = the correct answer
 const WORD_SETS = {
   location: [
     [
@@ -127,12 +125,7 @@ const WORD_SETS = {
   ],
 };
 
-const ALL_SETS = [
-  ...WORD_SETS.location,
-  ...WORD_SETS.animal,
-  ...WORD_SETS.food,
-];
-
+const ALL_SETS = [...WORD_SETS.location, ...WORD_SETS.animal, ...WORD_SETS.food];
 const rooms = {};
 
 function generateCode() {
@@ -163,6 +156,28 @@ function pickWordSet(genre) {
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
+function doReveal(room, code) {
+  // Build per-player reveal: each player's role & word
+  const playerReveal = room.players.map(p => ({
+    id: p.id,
+    name: p.name,
+    isSpy: p.id === room.spyId,
+    word: p.id === room.spyId ? null : room.correctWord,
+  }));
+
+  room.gameState = 'reveal';
+  io.to(code).emit('game-reveal', {
+    spyId: room.spyId,
+    spyName: room.players.find(p => p.id === room.spyId)?.name,
+    votedOutId: room.votedOutId || null,
+    votedOutName: room.players.find(p => p.id === room.votedOutId)?.name || null,
+    correctWord: room.correctWord,
+    wordList: room.wordSet,
+    playerReveal,
+  });
+  io.to(code).emit('room-update', getRoomState(room));
+}
+
 io.on('connection', (socket) => {
   console.log('Connected:', socket.id);
 
@@ -178,6 +193,7 @@ io.on('connection', (socket) => {
       wordSet: null,
       correctWord: null,
       spyId: null,
+      votedOutId: null,
       timerInterval: null,
       timeLeft: 0,
     };
@@ -192,7 +208,6 @@ io.on('connection', (socket) => {
     if (!room) return socket.emit('error', 'Room not found');
     if (room.gameState !== 'lobby') return socket.emit('error', 'Game already in progress');
     if (room.players.length >= 10) return socket.emit('error', 'Room is full');
-
     room.players.push({ id: socket.id, name });
     socket.join(code);
     socket.roomCode = code;
@@ -223,13 +238,13 @@ io.on('connection', (socket) => {
     const wordSet = pickWordSet(room.genre);
     const shuffledWords = shuffle(wordSet);
     const correctWord = wordSet[0];
-
     const spyIndex = Math.floor(Math.random() * room.players.length);
     const spyId = room.players[spyIndex].id;
 
     room.wordSet = shuffledWords;
     room.correctWord = correctWord;
     room.spyId = spyId;
+    room.votedOutId = null;
     room.gameState = 'playing';
     room.timeLeft = room.timerDuration;
 
@@ -250,30 +265,43 @@ io.on('connection', (socket) => {
       io.to(socket.roomCode).emit('timer-tick', { timeLeft: room.timeLeft });
       if (room.timeLeft <= 0) {
         clearInterval(room.timerInterval);
-        room.gameState = 'reveal';
-        io.to(socket.roomCode).emit('game-reveal', {
-          spyId: room.spyId,
-          spyName: room.players.find(p => p.id === room.spyId)?.name,
-          correctWord: room.correctWord,
-          wordList: room.wordSet,
-        });
-        io.to(socket.roomCode).emit('room-update', getRoomState(room));
+        doReveal(room, socket.roomCode);
       }
     }, 1000);
   });
 
+  // Host votes out a player — triggers voting screen for everyone,
+  // then host confirms to reveal
+  socket.on('vote-out', ({ targetId }) => {
+    const room = rooms[socket.roomCode];
+    if (!room || room.hostId !== socket.id) return;
+    if (room.gameState !== 'playing') return;
+    clearInterval(room.timerInterval);
+    room.votedOutId = targetId;
+    room.gameState = 'voting';
+
+    const target = room.players.find(p => p.id === targetId);
+    io.to(socket.roomCode).emit('voting-result', {
+      votedOutId: targetId,
+      votedOutName: target?.name || '???',
+    });
+    io.to(socket.roomCode).emit('room-update', getRoomState(room));
+  });
+
+  // After voting screen, host confirms reveal
+  socket.on('confirm-reveal', () => {
+    const room = rooms[socket.roomCode];
+    if (!room || room.hostId !== socket.id) return;
+    doReveal(room, socket.roomCode);
+  });
+
+  // Skip voting — just reveal without voting anyone out
   socket.on('reveal', () => {
     const room = rooms[socket.roomCode];
     if (!room || room.hostId !== socket.id) return;
     clearInterval(room.timerInterval);
-    room.gameState = 'reveal';
-    io.to(socket.roomCode).emit('game-reveal', {
-      spyId: room.spyId,
-      spyName: room.players.find(p => p.id === room.spyId)?.name,
-      correctWord: room.correctWord,
-      wordList: room.wordSet,
-    });
-    io.to(socket.roomCode).emit('room-update', getRoomState(room));
+    room.votedOutId = null;
+    doReveal(room, socket.roomCode);
   });
 
   socket.on('reset-game', () => {
@@ -282,6 +310,7 @@ io.on('connection', (socket) => {
     clearInterval(room.timerInterval);
     room.gameState = 'lobby';
     room.spyId = null;
+    room.votedOutId = null;
     room.wordSet = null;
     room.correctWord = null;
     room.timeLeft = 0;
@@ -293,19 +322,13 @@ io.on('connection', (socket) => {
     const code = socket.roomCode;
     const room = rooms[code];
     if (!room) return;
-
     room.players = room.players.filter(p => p.id !== socket.id);
-
     if (room.players.length === 0) {
       clearInterval(room.timerInterval);
       delete rooms[code];
       return;
     }
-
-    if (room.hostId === socket.id) {
-      room.hostId = room.players[0].id;
-    }
-
+    if (room.hostId === socket.id) room.hostId = room.players[0].id;
     io.to(code).emit('room-update', getRoomState(room));
   });
 });
