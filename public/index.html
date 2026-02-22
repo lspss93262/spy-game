@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPY WORD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a26;
+      --border: #2a2a40;
+      --accent: #e8ff47;
+      --accent2: #ff4757;
+      --text: #e8e8f0;
+      --muted: #6060808;
+      --spy: #ff4757;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-image: radial-gradient(ellipse at 20% 50%, #1a1a2e 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 20%, #0d1117 0%, transparent 50%);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-top: 20px;
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 10vw, 90px);
+      letter-spacing: 8px;
+      color: var(--accent);
+      text-shadow: 0 0 40px rgba(232,255,71,0.3);
+      line-height: 1;
+    }
+
+    header p {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #505070;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 480px;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .screen.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 12px;
+    }
+
+    input:focus { border-color: var(--accent); }
+    input::placeholder { color: #404060; }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+    }
+    .btn-primary:hover { background: #d4eb2a; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      margin-top: 10px;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .btn-danger {
+      background: var(--accent2);
+      color: white;
+      margin-top: 10px;
+    }
+    .btn-danger:hover { background: #ff2f3f; }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .divider {
+      text-align: center;
+      color: #404060;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin: 16px 0;
+    }
+
+    /* Lobby */
+    .room-code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 10px;
+      color: var(--accent);
+      text-align: center;
+      padding: 20px;
+      background: var(--surface2);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(232,255,71,0.4);
+    }
+
+    .room-code-label {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #505070;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .player-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .player-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--surface2);
+      border-radius: 8px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .player-item.host { border-color: rgba(232,255,71,0.3); }
+
+    .player-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #40e0a0;
+      flex-shrink: 0;
+    }
+
+    .player-name { flex: 1; }
+    .player-badge {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    /* Timer control */
+    .timer-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+
+    .timer-label { font-size: 12px; letter-spacing: 2px; color: #606080; flex: 1; }
+    .timer-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); min-width: 60px; text-align: center; }
+
+    .timer-btn {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .timer-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Game screen */
+    .role-banner {
+      text-align: center;
+      padding: 30px 20px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .role-banner.spy {
+      background: linear-gradient(135deg, #1a0810, #2a0f1a);
+      border: 1px solid rgba(255,71,87,0.4);
+    }
+
+    .role-banner.civilian {
+      background: linear-gradient(135deg, #0f1a0a, #1a2a10);
+      border: 1px solid rgba(232,255,71,0.3);
+    }
+
+    .role-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+
+    .role-banner.spy .role-label { color: var(--accent2); }
+    .role-banner.civilian .role-label { color: #60c070; }
+
+    .role-word {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 8vw, 64px);
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+
+    .role-banner.spy .role-word { color: var(--accent2); text-shadow: 0 0 30px rgba(255,71,87,0.5); }
+    .role-banner.civilian .role-word { color: var(--accent); text-shadow: 0 0 30px rgba(232,255,71,0.4); }
+
+    .role-hint {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #506050;
+      margin-top: 8px;
+    }
+
+    /* Timer display */
+    .big-timer {
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      transition: color 0.3s;
+      line-height: 1;
+    }
+    .big-timer.urgent { color: var(--accent2); animation: pulse 0.5s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Word grid */
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .word-cell {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .word-cell.correct {
+      background: rgba(232,255,71,0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .word-cell.wrong {
+      opacity: 0.35;
+    }
+
+    /* Reveal screen */
+    .reveal-spy {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, #1a0810, #2a0f1a);
+      border: 1px solid rgba(255,71,87,0.5);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .reveal-spy-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: var(--accent2);
+      margin-bottom: 8px;
+    }
+
+    .reveal-spy-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      letter-spacing: 4px;
+      color: white;
+    }
+
+    .reveal-word {
+      text-align: center;
+      padding: 20px;
+      background: var(--surface2);
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+
+    .reveal-word-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #606080;
+      margin-bottom: 6px;
+    }
+
+    .reveal-word-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      letter-spacing: 4px;
+      color: var(--accent);
+    }
+
+    .error-msg {
+      color: var(--accent2);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #505070;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .waiting-msg {
+      text-align: center;
+      color: #505070;
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 20px;
+    }
+
+    .players-in-game {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .player-chip {
+      padding: 6px 12px;
+      background: var(--surface2);
+      border-radius: 20px;
+      font-size: 12px;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SPY WORD</h1>
+  <p>Find the spy among you</p>
+</header>
+
+<!-- JOIN SCREEN -->
+<div class="screen active" id="screen-join">
+  <div class="card">
+    <div class="card-title">ENTER YOUR NAME</div>
+    <input type="text" id="input-name" placeholder="Your name..." maxlength="20"/>
+    <div class="card-title" style="margin-top:8px">CREATE ROOM</div>
+    <button class="btn btn-primary" onclick="createRoom()">CREATE NEW ROOM</button>
+    <div class="divider">— OR JOIN —</div>
+    <input type="text" id="input-code" placeholder="Room code (e.g. AB3X)" maxlength="4" style="text-transform:uppercase"/>
+    <button class="btn btn-secondary" onclick="joinRoom()">JOIN ROOM</button>
+    <div class="error-msg" id="join-error"></div>
+  </div>
+</div>
+
+<!-- LOBBY SCREEN -->
+<div class="screen" id="screen-lobby">
+  <div class="card">
+    <div class="room-code-label">ROOM CODE</div>
+    <div class="room-code" id="lobby-code">----</div>
+    <div class="section-label">PLAYERS (<span id="player-count">0</span>)</div>
+    <ul class="player-list" id="player-list"></ul>
+
+    <!-- Timer control (host only) -->
+    <div id="host-controls" style="display:none">
+      <div class="section-label">DISCUSSION TIMER</div>
+      <div class="timer-control">
+        <span class="timer-label">SECONDS</span>
+        <button class="timer-btn" onclick="adjustTimer(-15)">−</button>
+        <span class="timer-value" id="timer-display">60</span>
+        <button class="timer-btn" onclick="adjustTimer(15)">+</button>
+      </div>
+      <button class="btn btn-primary" id="start-btn" onclick="startGame()">START GAME</button>
+    </div>
+    <div id="guest-waiting" style="display:none">
+      <div class="waiting-msg">Waiting for host to start...</div>
+    </div>
+    <div class="error-msg" id="lobby-error"></div>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div class="screen" id="screen-game">
+  <div class="card">
+    <div id="role-display"></div>
+    <div class="big-timer" id="game-timer">60</div>
+    <div style="height:8px"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">WORD LIST — SPOT THE CORRECT ONE</div>
+    <div class="word-grid" id="word-grid"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">PLAYERS</div>
+    <div class="players-in-game" id="game-players"></div>
+    <div id="host-reveal-btn" style="display:none">
+      <button class="btn btn-danger" onclick="revealNow()">REVEAL SPY NOW</button>
+    </div>
+  </div>
+</div>
+
+<!-- REVEAL SCREEN -->
+<div class="screen" id="screen-reveal">
+  <div class="card">
+    <div class="reveal-spy">
+      <div class="reveal-spy-label">🕵️ THE SPY WAS</div>
+      <div class="reveal-spy-name" id="reveal-spy-name">---</div>
+    </div>
+    <div class="reveal-word">
+      <div class="reveal-word-label">THE CORRECT WORD WAS</div>
+      <div class="reveal-word-value" id="reveal-correct-word">---</div>
+    </div>
+    <div class="section-label">ALL WORDS</div>
+    <div class="word-grid" id="reveal-word-grid"></div>
+    <div id="host-reset-btn" style="display:none">
+      <button class="btn btn-primary" onclick="resetGame()" style="margin-top:16px">PLAY AGAIN</button>
+    </div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  let myId = null;
+  let myRoomCode = null;
+  let isHost = false;
+  let currentTimer = 60;
+  let myRole = null; // 'spy' or 'civilian'
+  let myWord = null;
+
+  // ─── Helpers ───────────────────────────────────────────
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function setError(elId, msg) {
+    document.getElementById(elId).textContent = msg;
+    setTimeout(() => document.getElementById(elId).textContent = '', 3000);
+  }
+
+  // ─── Join/Create ────────────────────────────────────────
+  function getName() {
+    const n = document.getElementById('input-name').value.trim();
+    if (!n) { setError('join-error', 'Please enter your name'); return null; }
+    return n;
+  }
+
+  function createRoom() {
+    const name = getName();
+    if (!name) return;
+    socket.emit('create-room', { name });
+  }
+
+  function joinRoom() {
+    const name = getName();
+    if (!name) return;
+    const code = document.getElementById('input-code').value.trim().toUpperCase();
+    if (!code || code.length !== 4) { setError('join-error', 'Enter a valid 4-letter room code'); return; }
+    socket.emit('join-room', { name, code });
+  }
+
+  // ─── Lobby ──────────────────────────────────────────────
+  function adjustTimer(delta) {
+    currentTimer = Math.max(15, Math.min(300, currentTimer + delta));
+    document.getElementById('timer-display').textContent = currentTimer;
+    socket.emit('set-timer', { duration: currentTimer });
+  }
+
+  function startGame() {
+    socket.emit('start-game');
+  }
+
+  function revealNow() {
+    socket.emit('reveal');
+  }
+
+  function resetGame() {
+    socket.emit('reset-game');
+  }
+
+  // ─── Socket events ──────────────────────────────────────
+  socket.on('room-joined', ({ code, playerId }) => {
+    myId = playerId;
+    myRoomCode = code;
+    document.getElementById('lobby-code').textContent = code;
+    showScreen('screen-lobby');
+  });
+
+  socket.on('room-update', ({ players, gameState, timerDuration, hostId }) => {
+    isHost = hostId === myId;
+    currentTimer = timerDuration;
+    document.getElementById('timer-display').textContent = timerDuration;
+    document.getElementById('player-count').textContent = players.length;
+
+    // Player list
+    const ul = document.getElementById('player-list');
+    ul.innerHTML = '';
+    players.forEach(p => {
+      const li = document.createElement('li');
+      li.className = 'player-item' + (p.id === hostId ? ' host' : '');
+      li.innerHTML = `<div class="player-dot"></div><span class="player-name">${p.name}</span>${p.id === hostId ? '<span class="player-badge">HOST</span>' : ''}`;
+      ul.appendChild(li);
+    });
+
+    // Host vs guest controls
+    if (gameState === 'lobby') {
+      document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
+      document.getElementById('guest-waiting').style.display = isHost ? 'none' : 'block';
+      document.getElementById('start-btn').disabled = players.length < 3;
+      showScreen('screen-lobby');
+    }
+
+    // Update game players display
+    const gamePlayers = document.getElementById('game-players');
+    if (gamePlayers) {
+      gamePlayers.innerHTML = players.map(p => `<div class="player-chip">${p.name}</div>`).join('');
+    }
+    document.getElementById('host-reveal-btn').style.display = isHost ? 'block' : 'none';
+    document.getElementById('host-reset-btn') && (document.getElementById('host-reset-btn').style.display = isHost ? 'block' : 'none');
+  });
+
+  socket.on('game-start', ({ isSpy, word, wordList, timeLeft }) => {
+    myRole = isSpy ? 'spy' : 'civilian';
+    myWord = word;
+
+    // Role display
+    const roleDiv = document.getElementById('role-display');
+    if (isSpy) {
+      roleDiv.innerHTML = `
+        <div class="role-banner spy">
+          <div class="role-label">🕵️ YOUR ROLE</div>
+          <div class="role-word">YOU ARE THE SPY</div>
+          <div class="role-hint">Figure out the secret word from context!</div>
+        </div>`;
+    } else {
+      roleDiv.innerHTML = `
+        <div class="role-banner civilian">
+          <div class="role-label">YOUR SECRET WORD</div>
+          <div class="role-word">${word}</div>
+          <div class="role-hint">Don't let the spy figure it out!</div>
+        </div>`;
+    }
+
+    // Word grid
+    const grid = document.getElementById('word-grid');
+    grid.innerHTML = wordList.map(w => `<div class="word-cell">${w}</div>`).join('');
+
+    // Timer
+    document.getElementById('game-timer').textContent = timeLeft;
+
+    showScreen('screen-game');
+  });
+
+  socket.on('timer-tick', ({ timeLeft }) => {
+    const el = document.getElementById('game-timer');
+    el.textContent = timeLeft;
+    el.className = 'big-timer' + (timeLeft <= 10 ? ' urgent' : '');
+  });
+
+  socket.on('game-reveal', ({ spyId, spyName, correctWord, wordList }) => {
+    document.getElementById('reveal-spy-name').textContent = spyName || '???';
+    document.getElementById('reveal-correct-word').textContent = correctWord || '???';
+
+    const grid = document.getElementById('reveal-word-grid');
+    if (wordList) {
+      grid.innerHTML = wordList.map(w =>
+        `<div class="word-cell ${w === correctWord ? 'correct' : 'wrong'}">${w}</div>`
+      ).join('');
+    }
+
+    document.getElementById('host-reset-btn').style.display = isHost ? 'block' : 'none';
+    showScreen('screen-reveal');
+  });
+
+  socket.on('game-reset', () => {
+    myRole = null;
+    myWord = null;
+    document.getElementById('game-timer').textContent = '60';
+    document.getElementById('game-timer').className = 'big-timer';
+    showScreen('screen-lobby');
+  });
+
+  socket.on('error', (msg) => {
+    setError('join-error', msg);
+    setError('lobby-error', msg);
+  });
+
+  // Enter key support
+  document.getElementById('input-code').addEventListener('input', e => {
+    e.target.value = e.target.value.toUpperCase();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      if (document.getElementById('screen-join').classList.contains('active')) {
+        const code = document.getElementById('input-code').value.trim();
+        code ? joinRoom() : createRoom();
+      }
+    }
+  });
+</script>
+</body>
+</html>
