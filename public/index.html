@@ -14,8 +14,7 @@
       --accent: #e8ff47;
       --accent2: #ff4757;
       --text: #e8e8f0;
-      --muted: #6060808;
-      --spy: #ff4757;
+      --muted: #505070;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,20 +27,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      padding: 20px 16px 40px;
       background-image: radial-gradient(ellipse at 20% 50%, #1a1a2e 0%, transparent 60%),
                         radial-gradient(ellipse at 80% 20%, #0d1117 0%, transparent 50%);
     }
 
     header {
       text-align: center;
-      margin-bottom: 40px;
-      padding-top: 20px;
+      margin-bottom: 32px;
+      padding-top: 16px;
     }
 
     header h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 10vw, 90px);
+      font-size: clamp(52px, 10vw, 86px);
       letter-spacing: 8px;
       color: var(--accent);
       text-shadow: 0 0 40px rgba(232,255,71,0.3);
@@ -51,369 +50,265 @@
     header p {
       font-size: 11px;
       letter-spacing: 4px;
-      color: #505070;
+      color: var(--muted);
       text-transform: uppercase;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
-    .screen {
-      width: 100%;
-      max-width: 480px;
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
+    .screen { width: 100%; max-width: 460px; display: none; animation: fadeIn 0.3s ease; }
     .screen.active { display: block; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 28px;
-      margin-bottom: 16px;
+      padding: 24px;
+      margin-bottom: 14px;
     }
 
     .card-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
+      font-size: 20px;
       letter-spacing: 3px;
       color: var(--accent);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    input[type="text"], input[type="number"] {
+    input[type="text"] {
       width: 100%;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 14px 16px;
+      padding: 13px 16px;
       color: var(--text);
       font-family: 'DM Mono', monospace;
       font-size: 15px;
       outline: none;
       transition: border-color 0.2s;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-
     input:focus { border-color: var(--accent); }
     input::placeholder { color: #404060; }
 
     .btn {
       width: 100%;
-      padding: 14px;
+      padding: 13px;
       border: none;
       border-radius: 8px;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       letter-spacing: 3px;
       cursor: pointer;
       transition: all 0.15s;
     }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #0a0a0f;
-    }
+    .btn-primary { background: var(--accent); color: #0a0a0f; }
     .btn-primary:hover { background: #d4eb2a; transform: translateY(-1px); }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      margin-top: 10px;
-    }
+    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); margin-top: 8px; }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-danger { background: var(--accent2); color: white; margin-top: 10px; }
+    .btn-danger:hover { background: #e03040; }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
 
-    .btn-danger {
-      background: var(--accent2);
-      color: white;
-      margin-top: 10px;
-    }
-    .btn-danger:hover { background: #ff2f3f; }
+    .divider { text-align: center; color: #404060; font-size: 11px; letter-spacing: 3px; margin: 14px 0; }
 
-    .btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .divider {
-      text-align: center;
-      color: #404060;
-      font-size: 11px;
-      letter-spacing: 3px;
-      margin: 16px 0;
-    }
-
-    /* Lobby */
+    /* Room code */
     .room-code {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      letter-spacing: 10px;
+      font-size: 52px;
+      letter-spacing: 12px;
       color: var(--accent);
       text-align: center;
-      padding: 20px;
+      padding: 18px;
       background: var(--surface2);
       border-radius: 10px;
-      margin-bottom: 16px;
-      text-shadow: 0 0 30px rgba(232,255,71,0.4);
+      margin-bottom: 6px;
+      text-shadow: 0 0 30px rgba(232,255,71,0.35);
     }
-
     .room-code-label {
       text-align: center;
       font-size: 11px;
       letter-spacing: 3px;
-      color: #505070;
+      color: var(--muted);
       text-transform: uppercase;
       margin-bottom: 20px;
     }
 
-    .player-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
+    /* Player list */
+    .player-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 18px; }
     .player-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 13px;
       background: var(--surface2);
       border-radius: 8px;
       font-size: 13px;
       border: 1px solid transparent;
-      transition: border-color 0.2s;
     }
-
-    .player-item.host { border-color: rgba(232,255,71,0.3); }
-
-    .player-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #40e0a0;
-      flex-shrink: 0;
-    }
-
+    .player-item.host { border-color: rgba(232,255,71,0.25); }
+    .player-dot { width: 7px; height: 7px; border-radius: 50%; background: #40e0a0; flex-shrink: 0; }
     .player-name { flex: 1; }
-    .player-badge {
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: var(--accent);
-      text-transform: uppercase;
-    }
+    .player-badge { font-size: 10px; letter-spacing: 2px; color: var(--accent); }
+
+    /* Section label */
+    .section-label { font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
 
     /* Timer control */
-    .timer-control {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .timer-row {
+      display: flex; align-items: center; gap: 10px;
       background: var(--surface2);
       border-radius: 8px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
+      padding: 11px 14px;
+      margin-bottom: 14px;
     }
-
-    .timer-label { font-size: 12px; letter-spacing: 2px; color: #606080; flex: 1; }
-    .timer-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); min-width: 60px; text-align: center; }
-
+    .timer-label { font-size: 11px; letter-spacing: 2px; color: var(--muted); flex: 1; }
+    .timer-value { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--accent); min-width: 70px; text-align: center; }
     .timer-btn {
-      width: 36px; height: 36px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 20px;
-      cursor: pointer;
+      width: 34px; height: 34px; border-radius: 6px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); font-size: 18px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.15s;
     }
     .timer-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Game screen */
-    .role-banner {
-      text-align: center;
-      padding: 30px 20px;
-      border-radius: 12px;
-      margin-bottom: 16px;
+    /* Genre picker */
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
     }
+    .genre-btn {
+      padding: 10px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .genre-btn .genre-icon { display: block; font-size: 22px; margin-bottom: 4px; }
+    .genre-btn:hover { border-color: var(--accent); color: var(--text); }
+    .genre-btn.active { border-color: var(--accent); background: rgba(232,255,71,0.1); color: var(--accent); }
 
+    /* Waiting */
+    .waiting-msg { text-align: center; color: var(--muted); font-size: 12px; letter-spacing: 2px; padding: 18px; }
+
+    /* Role banner */
+    .role-banner { text-align: center; padding: 26px 18px; border-radius: 12px; margin-bottom: 14px; }
     .role-banner.spy {
       background: linear-gradient(135deg, #1a0810, #2a0f1a);
       border: 1px solid rgba(255,71,87,0.4);
     }
-
     .role-banner.civilian {
       background: linear-gradient(135deg, #0f1a0a, #1a2a10);
       border: 1px solid rgba(232,255,71,0.3);
     }
-
-    .role-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
-    }
-
+    .role-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; margin-bottom: 6px; }
     .role-banner.spy .role-label { color: var(--accent2); }
     .role-banner.civilian .role-label { color: #60c070; }
 
-    .role-word {
+    /* Trilingual word display */
+    .tri-word {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .tri-word .w-en {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(40px, 8vw, 64px);
-      letter-spacing: 4px;
+      font-size: clamp(36px, 7vw, 56px);
+      letter-spacing: 3px;
       line-height: 1;
     }
-
-    .role-banner.spy .role-word { color: var(--accent2); text-shadow: 0 0 30px rgba(255,71,87,0.5); }
-    .role-banner.civilian .role-word { color: var(--accent); text-shadow: 0 0 30px rgba(232,255,71,0.4); }
-
-    .role-hint {
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: #506050;
-      margin-top: 8px;
+    .tri-word .w-zh {
+      font-size: clamp(22px, 4vw, 32px);
+      letter-spacing: 4px;
+      line-height: 1.2;
     }
+    .tri-word .w-ja {
+      font-size: clamp(14px, 2.5vw, 20px);
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.4;
+    }
+    .role-banner.spy .w-en,
+    .role-banner.spy .w-zh { color: var(--accent2); text-shadow: 0 0 20px rgba(255,71,87,0.5); }
+    .role-banner.civilian .w-en,
+    .role-banner.civilian .w-zh { color: var(--accent); text-shadow: 0 0 20px rgba(232,255,71,0.4); }
+    .role-hint { font-size: 11px; letter-spacing: 2px; color: #506050; margin-top: 10px; }
 
-    /* Timer display */
+    /* Big timer */
     .big-timer {
       text-align: center;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 80px;
+      font-size: 76px;
       letter-spacing: 4px;
       color: var(--accent);
-      transition: color 0.3s;
       line-height: 1;
+      transition: color 0.3s;
     }
     .big-timer.urgent { color: var(--accent2); animation: pulse 0.5s infinite; }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
     /* Word grid */
-    .word-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
+    .word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 14px; }
     .word-cell {
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 12px;
+      padding: 10px 8px;
       text-align: center;
-      font-size: 14px;
-      letter-spacing: 1px;
       transition: all 0.2s;
     }
+    .word-cell .wc-en { font-size: 13px; font-weight: 500; letter-spacing: 1px; }
+    .word-cell .wc-zh { font-size: 15px; letter-spacing: 2px; margin: 2px 0; }
+    .word-cell .wc-ja { font-size: 11px; color: var(--muted); }
 
     .word-cell.correct {
-      background: rgba(232,255,71,0.15);
+      background: rgba(232,255,71,0.12);
       border-color: var(--accent);
-      color: var(--accent);
-      font-weight: bold;
     }
+    .word-cell.correct .wc-en,
+    .word-cell.correct .wc-zh { color: var(--accent); }
+    .word-cell.wrong { opacity: 0.3; }
 
-    .word-cell.wrong {
-      opacity: 0.35;
-    }
+    /* Players in game */
+    .players-in-game { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+    .player-chip { padding: 5px 11px; background: var(--surface2); border-radius: 20px; font-size: 12px; border: 1px solid var(--border); }
 
-    /* Reveal screen */
+    /* Reveal */
     .reveal-spy {
-      text-align: center;
-      padding: 30px;
+      text-align: center; padding: 28px;
       background: linear-gradient(135deg, #1a0810, #2a0f1a);
       border: 1px solid rgba(255,71,87,0.5);
-      border-radius: 12px;
-      margin-bottom: 16px;
+      border-radius: 12px; margin-bottom: 14px;
     }
+    .reveal-spy-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 5px; color: var(--accent2); margin-bottom: 6px; }
+    .reveal-spy-name { font-family: 'Bebas Neue', sans-serif; font-size: 50px; letter-spacing: 4px; color: white; }
 
-    .reveal-spy-label {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 5px;
-      color: var(--accent2);
-      margin-bottom: 8px;
-    }
+    .reveal-word { text-align: center; padding: 18px; background: var(--surface2); border-radius: 10px; margin-bottom: 14px; }
+    .reveal-word-label { font-size: 11px; letter-spacing: 3px; color: var(--muted); margin-bottom: 8px; }
 
-    .reveal-spy-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      letter-spacing: 4px;
-      color: white;
-    }
-
-    .reveal-word {
-      text-align: center;
-      padding: 20px;
-      background: var(--surface2);
-      border-radius: 10px;
-      margin-bottom: 16px;
-    }
-
-    .reveal-word-label {
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: #606080;
-      margin-bottom: 6px;
-    }
-
-    .reveal-word-value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 40px;
-      letter-spacing: 4px;
-      color: var(--accent);
-    }
-
-    .error-msg {
-      color: var(--accent2);
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-align: center;
-      margin-top: 8px;
-      min-height: 18px;
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: #505070;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .waiting-msg {
-      text-align: center;
-      color: #505070;
-      font-size: 12px;
-      letter-spacing: 2px;
-      padding: 20px;
-    }
-
-    .players-in-game {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .player-chip {
-      padding: 6px 12px;
-      background: var(--surface2);
+    /* Readonly genre badge for guests */
+    .genre-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
       border-radius: 20px;
       font-size: 12px;
-      border: 1px solid var(--border);
+      letter-spacing: 2px;
+      color: var(--accent);
+      background: rgba(232,255,71,0.07);
+      margin-bottom: 14px;
     }
+
+    .error-msg { color: var(--accent2); font-size: 12px; letter-spacing: 1px; text-align: center; margin-top: 6px; min-height: 18px; }
   </style>
 </head>
 <body>
@@ -423,61 +318,83 @@
   <p>Find the spy among you</p>
 </header>
 
-<!-- JOIN SCREEN -->
+<!-- ── JOIN ─────────────────────────────────────── -->
 <div class="screen active" id="screen-join">
   <div class="card">
     <div class="card-title">ENTER YOUR NAME</div>
     <input type="text" id="input-name" placeholder="Your name..." maxlength="20"/>
-    <div class="card-title" style="margin-top:8px">CREATE ROOM</div>
     <button class="btn btn-primary" onclick="createRoom()">CREATE NEW ROOM</button>
     <div class="divider">— OR JOIN —</div>
-    <input type="text" id="input-code" placeholder="Room code (e.g. AB3X)" maxlength="4" style="text-transform:uppercase"/>
+    <input type="text" id="input-code" placeholder="Room code (e.g. AB3X)" maxlength="4"/>
     <button class="btn btn-secondary" onclick="joinRoom()">JOIN ROOM</button>
     <div class="error-msg" id="join-error"></div>
   </div>
 </div>
 
-<!-- LOBBY SCREEN -->
+<!-- ── LOBBY ─────────────────────────────────────── -->
 <div class="screen" id="screen-lobby">
   <div class="card">
-    <div class="room-code-label">ROOM CODE</div>
+    <div class="room-code-label">ROOM CODE — SHARE THIS</div>
     <div class="room-code" id="lobby-code">----</div>
+
     <div class="section-label">PLAYERS (<span id="player-count">0</span>)</div>
     <ul class="player-list" id="player-list"></ul>
 
-    <!-- Timer control (host only) -->
+    <!-- HOST CONTROLS -->
     <div id="host-controls" style="display:none">
-      <div class="section-label">DISCUSSION TIMER</div>
-      <div class="timer-control">
-        <span class="timer-label">SECONDS</span>
-        <button class="timer-btn" onclick="adjustTimer(-15)">−</button>
-        <span class="timer-value" id="timer-display">60</span>
-        <button class="timer-btn" onclick="adjustTimer(15)">+</button>
+      <div class="section-label">GENRE</div>
+      <div class="genre-grid">
+        <button class="genre-btn" data-genre="location" onclick="setGenre('location')">
+          <span class="genre-icon">🗺️</span>Location
+        </button>
+        <button class="genre-btn" data-genre="animal" onclick="setGenre('animal')">
+          <span class="genre-icon">🐾</span>Animal
+        </button>
+        <button class="genre-btn" data-genre="food" onclick="setGenre('food')">
+          <span class="genre-icon">🍜</span>Food
+        </button>
+        <button class="genre-btn active" data-genre="random" onclick="setGenre('random')">
+          <span class="genre-icon">🎲</span>Random
+        </button>
       </div>
+
+      <div class="section-label">DISCUSSION TIMER</div>
+      <div class="timer-row">
+        <span class="timer-label">DURATION</span>
+        <button class="timer-btn" onclick="adjustTimer(-60)">−</button>
+        <span class="timer-value" id="timer-display">1:00</span>
+        <button class="timer-btn" onclick="adjustTimer(60)">+</button>
+      </div>
+
       <button class="btn btn-primary" id="start-btn" onclick="startGame()">START GAME</button>
+      <div class="error-msg" id="lobby-error"></div>
     </div>
+
+    <!-- GUEST VIEW -->
     <div id="guest-waiting" style="display:none">
+      <div class="section-label">GENRE</div>
+      <div id="guest-genre-badge" class="genre-badge">🎲 Random</div>
+      <div class="section-label">TIMER</div>
+      <div class="genre-badge" id="guest-timer-badge">1:00</div>
       <div class="waiting-msg">Waiting for host to start...</div>
     </div>
-    <div class="error-msg" id="lobby-error"></div>
   </div>
 </div>
 
-<!-- GAME SCREEN -->
+<!-- ── GAME ─────────────────────────────────────── -->
 <div class="screen" id="screen-game">
   <div class="card">
     <div id="role-display"></div>
-    <div class="big-timer" id="game-timer">60</div>
-    <div style="height:8px"></div>
+    <div class="big-timer" id="game-timer">1:00</div>
   </div>
 
   <div class="card">
-    <div class="section-label">WORD LIST — SPOT THE CORRECT ONE</div>
+    <div class="section-label">WORD LIST — FIND THE CORRECT ONE</div>
     <div class="word-grid" id="word-grid"></div>
   </div>
 
   <div class="card">
-    <div class="section-label">PLAYERS</div>
+    <div class="section-label">PLAYERS IN ROOM</div>
     <div class="players-in-game" id="game-players"></div>
     <div id="host-reveal-btn" style="display:none">
       <button class="btn btn-danger" onclick="revealNow()">REVEAL SPY NOW</button>
@@ -485,21 +402,24 @@
   </div>
 </div>
 
-<!-- REVEAL SCREEN -->
+<!-- ── REVEAL ─────────────────────────────────────── -->
 <div class="screen" id="screen-reveal">
   <div class="card">
     <div class="reveal-spy">
       <div class="reveal-spy-label">🕵️ THE SPY WAS</div>
       <div class="reveal-spy-name" id="reveal-spy-name">---</div>
     </div>
+
     <div class="reveal-word">
       <div class="reveal-word-label">THE CORRECT WORD WAS</div>
-      <div class="reveal-word-value" id="reveal-correct-word">---</div>
+      <div id="reveal-correct-word"></div>
     </div>
+
     <div class="section-label">ALL WORDS</div>
     <div class="word-grid" id="reveal-word-grid"></div>
+
     <div id="host-reset-btn" style="display:none">
-      <button class="btn btn-primary" onclick="resetGame()" style="margin-top:16px">PLAY AGAIN</button>
+      <button class="btn btn-primary" onclick="resetGame()" style="margin-top:14px">PLAY AGAIN</button>
     </div>
   </div>
 </div>
@@ -508,24 +428,52 @@
 <script>
   const socket = io();
   let myId = null;
-  let myRoomCode = null;
   let isHost = false;
-  let currentTimer = 60;
-  let myRole = null; // 'spy' or 'civilian'
-  let myWord = null;
+  let timerSeconds = 60; // local copy for display
 
-  // ─── Helpers ───────────────────────────────────────────
+  const GENRE_LABELS = {
+    location: '🗺️ Location',
+    animal:   '🐾 Animal',
+    food:     '🍜 Food',
+    random:   '🎲 Random',
+  };
+
+  // ── helpers ────────────────────────────────────────
   function showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
 
-  function setError(elId, msg) {
-    document.getElementById(elId).textContent = msg;
-    setTimeout(() => document.getElementById(elId).textContent = '', 3000);
+  function setError(id, msg) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    setTimeout(() => el.textContent = '', 3000);
   }
 
-  // ─── Join/Create ────────────────────────────────────────
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${String(sec).padStart(2, '0')}`;
+  }
+
+  function renderWordCell(w, extraClass = '') {
+    return `<div class="word-cell ${extraClass}">
+      <div class="wc-zh">${w.zh}</div>
+      <div class="wc-en">${w.en}</div>
+      <div class="wc-ja">${w.ja}</div>
+    </div>`;
+  }
+
+  function renderTriWord(w, cls = '') {
+    return `<div class="tri-word ${cls}">
+      <div class="w-zh">${w.zh}</div>
+      <div class="w-en">${w.en}</div>
+      <div class="w-ja">${w.ja}</div>
+    </div>`;
+  }
+
+  // ── join / create ───────────────────────────────────
   function getName() {
     const n = document.getElementById('input-name').value.trim();
     if (!n) { setError('join-error', 'Please enter your name'); return null; }
@@ -533,50 +481,60 @@
   }
 
   function createRoom() {
-    const name = getName();
-    if (!name) return;
+    const name = getName(); if (!name) return;
     socket.emit('create-room', { name });
   }
 
   function joinRoom() {
-    const name = getName();
-    if (!name) return;
+    const name = getName(); if (!name) return;
     const code = document.getElementById('input-code').value.trim().toUpperCase();
-    if (!code || code.length !== 4) { setError('join-error', 'Enter a valid 4-letter room code'); return; }
+    if (!code || code.length !== 4) { setError('join-error', 'Enter a valid 4-letter code'); return; }
     socket.emit('join-room', { name, code });
   }
 
-  // ─── Lobby ──────────────────────────────────────────────
+  // ── lobby controls ──────────────────────────────────
+  function setGenre(genre) {
+    socket.emit('set-genre', { genre });
+    document.querySelectorAll('.genre-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.genre === genre);
+    });
+  }
+
   function adjustTimer(delta) {
-    currentTimer = Math.max(15, Math.min(300, currentTimer + delta));
-    document.getElementById('timer-display').textContent = currentTimer;
-    socket.emit('set-timer', { duration: currentTimer });
+    // step by 1 min, range 60–600
+    timerSeconds = Math.max(60, Math.min(600, timerSeconds + delta));
+    document.getElementById('timer-display').textContent = fmtTime(timerSeconds);
+    socket.emit('set-timer', { duration: timerSeconds });
   }
 
-  function startGame() {
-    socket.emit('start-game');
-  }
+  function startGame() { socket.emit('start-game'); }
+  function revealNow() { socket.emit('reveal'); }
+  function resetGame() { socket.emit('reset-game'); }
 
-  function revealNow() {
-    socket.emit('reveal');
-  }
-
-  function resetGame() {
-    socket.emit('reset-game');
-  }
-
-  // ─── Socket events ──────────────────────────────────────
+  // ── socket events ───────────────────────────────────
   socket.on('room-joined', ({ code, playerId }) => {
     myId = playerId;
-    myRoomCode = code;
     document.getElementById('lobby-code').textContent = code;
     showScreen('screen-lobby');
   });
 
-  socket.on('room-update', ({ players, gameState, timerDuration, hostId }) => {
+  socket.on('room-update', ({ players, gameState, timerDuration, hostId, genre }) => {
     isHost = hostId === myId;
-    currentTimer = timerDuration;
-    document.getElementById('timer-display').textContent = timerDuration;
+    timerSeconds = timerDuration;
+
+    // Timer display
+    document.getElementById('timer-display') && (document.getElementById('timer-display').textContent = fmtTime(timerDuration));
+    document.getElementById('guest-timer-badge') && (document.getElementById('guest-timer-badge').textContent = fmtTime(timerDuration));
+
+    // Genre badge for guests
+    document.getElementById('guest-genre-badge') && (document.getElementById('guest-genre-badge').textContent = GENRE_LABELS[genre] || genre);
+
+    // Genre buttons (host)
+    document.querySelectorAll('.genre-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.genre === genre);
+    });
+
+    // Player count
     document.getElementById('player-count').textContent = players.length;
 
     // Player list
@@ -589,100 +547,105 @@
       ul.appendChild(li);
     });
 
-    // Host vs guest controls
-    if (gameState === 'lobby') {
-      document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
-      document.getElementById('guest-waiting').style.display = isHost ? 'none' : 'block';
-      document.getElementById('start-btn').disabled = players.length < 3;
-      showScreen('screen-lobby');
-    }
+    // Game players chips
+    const gp = document.getElementById('game-players');
+    if (gp) gp.innerHTML = players.map(p => `<div class="player-chip">${p.name}</div>`).join('');
 
-    // Update game players display
-    const gamePlayers = document.getElementById('game-players');
-    if (gamePlayers) {
-      gamePlayers.innerHTML = players.map(p => `<div class="player-chip">${p.name}</div>`).join('');
-    }
-    document.getElementById('host-reveal-btn').style.display = isHost ? 'block' : 'none';
-    document.getElementById('host-reset-btn') && (document.getElementById('host-reset-btn').style.display = isHost ? 'block' : 'none');
+    // Host/guest view
+    document.getElementById('host-controls').style.display = isHost ? 'block' : 'none';
+    document.getElementById('guest-waiting').style.display = isHost ? 'none' : 'block';
+
+    const startBtn = document.getElementById('start-btn');
+    if (startBtn) startBtn.disabled = players.length < 3;
+
+    const hrb = document.getElementById('host-reveal-btn');
+    if (hrb) hrb.style.display = isHost ? 'block' : 'none';
+
+    const hrsb = document.getElementById('host-reset-btn');
+    if (hrsb) hrsb.style.display = isHost ? 'block' : 'none';
+
+    if (gameState === 'lobby') showScreen('screen-lobby');
   });
 
   socket.on('game-start', ({ isSpy, word, wordList, timeLeft }) => {
-    myRole = isSpy ? 'spy' : 'civilian';
-    myWord = word;
-
-    // Role display
+    // Role banner
     const roleDiv = document.getElementById('role-display');
     if (isSpy) {
       roleDiv.innerHTML = `
         <div class="role-banner spy">
           <div class="role-label">🕵️ YOUR ROLE</div>
-          <div class="role-word">YOU ARE THE SPY</div>
-          <div class="role-hint">Figure out the secret word from context!</div>
+          <div class="tri-word">
+            <div class="w-zh" style="color:var(--accent2);font-size:28px;text-shadow:0 0 20px rgba(255,71,87,0.5)">你是臥底</div>
+            <div class="w-en" style="color:var(--accent2);font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:3px">YOU ARE THE SPY</div>
+            <div class="w-ja" style="color:rgba(255,71,87,0.6);font-size:16px">あなたはスパイです</div>
+          </div>
+          <div class="role-hint">Blend in. Guess the word from context!</div>
         </div>`;
     } else {
       roleDiv.innerHTML = `
         <div class="role-banner civilian">
           <div class="role-label">YOUR SECRET WORD</div>
-          <div class="role-word">${word}</div>
+          ${renderTriWord(word)}
           <div class="role-hint">Don't let the spy figure it out!</div>
         </div>`;
     }
 
     // Word grid
     const grid = document.getElementById('word-grid');
-    grid.innerHTML = wordList.map(w => `<div class="word-cell">${w}</div>`).join('');
+    grid.innerHTML = wordList.map(w => renderWordCell(w)).join('');
 
     // Timer
-    document.getElementById('game-timer').textContent = timeLeft;
+    document.getElementById('game-timer').textContent = fmtTime(timeLeft);
+    document.getElementById('game-timer').className = 'big-timer';
 
     showScreen('screen-game');
   });
 
   socket.on('timer-tick', ({ timeLeft }) => {
     const el = document.getElementById('game-timer');
-    el.textContent = timeLeft;
+    el.textContent = fmtTime(timeLeft);
     el.className = 'big-timer' + (timeLeft <= 10 ? ' urgent' : '');
   });
 
-  socket.on('game-reveal', ({ spyId, spyName, correctWord, wordList }) => {
+  socket.on('game-reveal', ({ spyName, correctWord, wordList }) => {
     document.getElementById('reveal-spy-name').textContent = spyName || '???';
-    document.getElementById('reveal-correct-word').textContent = correctWord || '???';
+
+    const rcw = document.getElementById('reveal-correct-word');
+    if (correctWord) {
+      rcw.innerHTML = renderTriWord(correctWord);
+      // style the tri-word in accent
+      rcw.querySelectorAll('.w-en,.w-zh').forEach(el => el.style.color = 'var(--accent)');
+    }
 
     const grid = document.getElementById('reveal-word-grid');
-    if (wordList) {
+    if (wordList && correctWord) {
       grid.innerHTML = wordList.map(w =>
-        `<div class="word-cell ${w === correctWord ? 'correct' : 'wrong'}">${w}</div>`
+        renderWordCell(w, w.en === correctWord.en ? 'correct' : 'wrong')
       ).join('');
     }
 
-    document.getElementById('host-reset-btn').style.display = isHost ? 'block' : 'none';
     showScreen('screen-reveal');
   });
 
   socket.on('game-reset', () => {
-    myRole = null;
-    myWord = null;
-    document.getElementById('game-timer').textContent = '60';
+    document.getElementById('game-timer').textContent = fmtTime(timerSeconds);
     document.getElementById('game-timer').className = 'big-timer';
     showScreen('screen-lobby');
   });
 
-  socket.on('error', (msg) => {
+  socket.on('error', msg => {
     setError('join-error', msg);
     setError('lobby-error', msg);
   });
 
-  // Enter key support
+  // Input helpers
   document.getElementById('input-code').addEventListener('input', e => {
     e.target.value = e.target.value.toUpperCase();
   });
-
   document.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      if (document.getElementById('screen-join').classList.contains('active')) {
-        const code = document.getElementById('input-code').value.trim();
-        code ? joinRoom() : createRoom();
-      }
+    if (e.key !== 'Enter') return;
+    if (document.getElementById('screen-join').classList.contains('active')) {
+      document.getElementById('input-code').value.trim() ? joinRoom() : createRoom();
     }
   });
 </script>
