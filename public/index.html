@@ -411,34 +411,32 @@
       gap: 1px;
     }
 
-    .tri-word .w-zh {
+    .tri-word .w-zh,
+    .tri-word .w-en,
+    .tri-word .w-ja {
       font-size: clamp(22px, 4vw, 30px);
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       line-height: 1.2;
+      color: white;
+      /* same color, not muted */
     }
 
     .tri-word .w-en {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(32px, 6vw, 50px);
-      letter-spacing: 3px;
-      line-height: 1;
-    }
-
-    .tri-word .w-ja {
-      font-size: clamp(13px, 2.5vw, 18px);
-      letter-spacing: 2px;
-      color: rgba(255, 255, 255, 0.45);
-      line-height: 1.4;
+      font-size: clamp(26px, 4.5vw, 36px);
+      /* slightly larger to match visual weight of CJK fonts */
     }
 
     .role-banner.spy .w-en,
-    .role-banner.spy .w-zh {
+    .role-banner.spy .w-zh,
+    .role-banner.spy .w-ja {
       color: var(--accent2);
       text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
     }
 
     .role-banner.civilian .w-en,
-    .role-banner.civilian .w-zh {
+    .role-banner.civilian .w-zh,
+    .role-banner.civilian .w-ja {
       color: var(--accent);
       text-shadow: 0 0 20px rgba(232, 255, 71, 0.4);
     }
@@ -495,20 +493,13 @@
       transition: all 0.2s;
     }
 
-    .word-cell .wc-zh {
-      font-size: 15px;
-      letter-spacing: 2px;
-    }
-
-    .word-cell .wc-en {
-      font-size: 12px;
+    .word-cell .wc-zh,
+    .word-cell .wc-en,
+    .word-cell .wc-ja {
+      font-size: 14px;
       letter-spacing: 1px;
       margin: 2px 0;
-    }
-
-    .word-cell .wc-ja {
-      font-size: 11px;
-      color: var(--muted);
+      color: var(--text);
     }
 
     .word-cell.correct {
